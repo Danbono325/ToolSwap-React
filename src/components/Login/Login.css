@@ -1,0 +1,65 @@
+form {
+  border-radius: 10px;
+  background-color: lightgray;
+  color: black;
+  padding: 20px;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 50px;
+  text-align: center;
+}
+
+h2 {
+  margin-top: 0px;
+  margin-bottom: 20px;
+}
+
+input {
+  width: 75%;
+  padding: 8px 8px;
+  margin: 8px 0px;
+  border: none;
+  border-radius: 6px;
+  background-color: white;
+}
+
+input[type="submit"] {
+  background-color: #1bbc86;
+  border: 5px;
+  color: black;
+  text-decoration: none;
+  margin: 4px 4px;
+  cursor: pointer;
+}
+
+.signinButton {
+  background-color: #ffff44 !important;
+}
+
+input[type="submit"]:hover {
+  background-color: black;
+  color: white;
+}
+
+input[type="checkbox"] {
+  float: left;
+  width: 20px;
+  margin-left: 0px !important;
+}
+
+.options {
+  width: 75.5%;
+  display: flex;
+  justify-content: space-between;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.buttons {
+  display: inline-flex;
+  width: 75%;
+}
+
+.remember {
+  display: flex;
+}

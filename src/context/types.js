@@ -28,3 +28,11 @@ export const UPDATE_ASCOMPLETED = "UPDATE_ASCOMPLETED";
 //export const CLEAR_LISTINGS = "CLEAR_LISTINGS";
 //export const FILTER_CONTACTS = "FILTER_CONTACTS";
 //export const CLEAR_FILTER = "CLEAR_FILTER";
+
+// BIDS
+export const CREATE_BID = "CREATE_BID";
+export const GETUSER_BIDS = "GETUSER_BIDS";
+export const GETLISTING_BIDS = "GETLISTING_BIDS";
+export const UPDATE_BID = "UPDATE_BID";
+export const DELETE_BID = "DELETE_BID";
+export const BID_ERROR = "BID_ERROR";

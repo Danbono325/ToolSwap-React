@@ -71,7 +71,7 @@ const ListingForm = () => {
   return (
     <div>
       <form onSubmit={onSubmit} id="listingForm">
-        <h2>{current != null ? "Edit Contact" : "Add Contact"}</h2>
+        <h2>{current != null ? "Edit Listing" : "Add Listing"}</h2>
         <input
           type="text"
           name="title"

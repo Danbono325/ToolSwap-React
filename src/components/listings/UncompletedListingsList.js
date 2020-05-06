@@ -8,7 +8,11 @@ const UncompletedListingsList = () => {
   const { listings } = listingContext;
 
   return listings.map((listing) => (
-    <UncompletedListingItem key={listing.listingID} listing={listing} />
+    <UncompletedListingItem
+      key={listing.listingID}
+      listing={listing}
+      showButton={true}
+    />
   ));
 };
 

@@ -73,12 +73,12 @@ const Login = (props) => {
         </a>
       </div>
       <div className="buttons">
-        <input type="submit" name="login" value="LOG IN" />
+        <input type="submit" name="login" value="Login" />
         <Link to="/register">
           <input
             name="signup"
             className="registerButton"
-            defaultValue="REGISTER"
+            defaultValue="Register"
           />
         </Link>
       </div>

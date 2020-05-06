@@ -50,13 +50,15 @@ const Header = ({ name }) => {
 
   return (
     <div className="header">
-      <img
-        src={Logo}
-        alt="IMG..."
-        style={{ width: "80px", marginRight: "10px" }}
-      />
-      <h1 id="tit">{name}</h1>
-      <ul>{isAuthenticated ? authLinks : guestLinks}</ul>
+      <div className="headerContainer">
+        <img
+          src={Logo}
+          alt="IMG..."
+          style={{ width: "80px", marginRight: "10px" }}
+        />
+        <h1 id="tit">{name}</h1>
+        <ul>{isAuthenticated ? authLinks : guestLinks}</ul>
+      </div>
     </div>
   );
 };

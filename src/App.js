@@ -7,6 +7,8 @@ import Register from "./components/auth/Register";
 import Home from "./components/pages/Home";
 import MyListings from "./components/pages/MyListings";
 import Account from "./components/pages/Account";
+import PlaceBid from "./components/pages/PlaceBid";
+
 import Alerts from "./components/layout/Alerts";
 
 import AuthState from "./context/auth/AuthState";
@@ -35,6 +37,7 @@ const App = () => {
                 <PrivateRoute exact path="/" component={Home} />
                 <PrivateRoute exact path="/account" component={Account} />
                 <PrivateRoute exact path="/MyListings" component={MyListings} />
+                <Route exact path="/placebid" component={PlaceBid} />
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/register" component={Register} />
               </Switch>

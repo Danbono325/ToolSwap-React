@@ -1,7 +1,7 @@
 import React, { useEffect, useContext } from "react";
 import ListingContext from "../../context/listings/listingContext";
 
-const UncompletedListingItem = ({ listing }) => {
+const UncompletedListingItem = ({ listing, showButton }) => {
   const listingContext = useContext(ListingContext);
 
   const { getUncompletedListings } = listingContext;
@@ -33,9 +33,11 @@ const UncompletedListingItem = ({ listing }) => {
       {expectedWeeks > 0 && <span>{expectedWeeks} Weeks </span>}
       {expectedDays > 0 && <span>{expectedDays} Days </span>}
       <div className="buttonContainer">
-        <button className="btn btn-primary" onClick={onBid}>
-          Bid
-        </button>
+        {showButton && (
+          <button className="btn btn-primary" onClick={onBid}>
+            Bid
+          </button>
+        )}
       </div>
     </div>
   );

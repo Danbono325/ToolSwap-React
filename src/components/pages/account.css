@@ -1,0 +1,38 @@
+.editHeader {
+  margin: 16px 0px 0px 8px;
+}
+.lab {
+  min-width: 25%;
+  color: lightslategrey;
+}
+p.solid {
+  border-style: solid;
+  border-color: lightslategrey;
+  border-width: 1.5px;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+}
+.mr-2 {
+  margin-right: 2em;
+}
+.editInput {
+  border-style: solid;
+  border-color: lightslategrey;
+  border-width: 1.5px;
+  border-radius: 2px;
+  font-size: medium;
+}
+.modalButtons {
+  font-size: smaller !important;
+  width: 50% !important;
+}
+.modalForm {
+  margin-top: 0px;
+}
+.buttonContainer {
+  display: flex;
+  justify-content: space-between;
+  margin-left: 8px;
+  margin-right: 8px;
+}

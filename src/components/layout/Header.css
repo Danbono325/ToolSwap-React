@@ -1,0 +1,29 @@
+.header {
+  background-color: #1bbc86;
+  padding: 10px;
+  display: flex;
+  font-size: 1rem;
+}
+#tit {
+  color: black;
+}
+
+ul {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  width: 80%;
+}
+.header a {
+  margin-right: 10px;
+  color: black;
+  text-decoration: none;
+  font-size: 1.2rem;
+}
+a:hover {
+  color: #666;
+}
+.hello {
+  font-size: 1.2rem;
+  margin-right: 10px;
+}

@@ -1,0 +1,30 @@
+// USER/AUTH
+export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
+export const REGISTER_FAIL = "REGISTER_FAIL";
+export const USER_LOADED = "USER_LOADED";
+export const AUTH_ERROR = "AUTH_ERROR";
+export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
+export const LOGIN_FAIL = "LOGIN_FAIL";
+export const LOGOUT = "LOGOUT";
+export const CLEAR_ERRORS = "CLEAR_ERRORS";
+export const UPDATE_SUCCESS = "UPDATE_SUCCESS";
+export const UPDATE_FAILED = "UPDATE_FAILED";
+
+// ALERTS
+export const SET_ALERT = "SET_ALERT";
+export const REMOVE_ALERT = "REMOVE_ALERT";
+
+// LISTINGS
+export const ADD_LISTING = "ADD_LISTING";
+export const DELETE_LISTING = "DELETE_LISTING";
+export const SET_CURRENT = "SET_CURRENT";
+export const CLEAR_CURRENT = "CLEAR_CURRENT";
+export const UPDATE_LISTING = "UPDATE_LISTING";
+export const LISTING_ERROR = "LISTINGS_ERROR";
+export const GET_LISTINGS = "GET_LISTINGS";
+export const GET_LISTING = "GET_LISTING";
+export const UPDATE_ASCOMPLETED = "UPDATE_ASCOMPLETED";
+
+//export const CLEAR_LISTINGS = "CLEAR_LISTINGS";
+//export const FILTER_CONTACTS = "FILTER_CONTACTS";
+//export const CLEAR_FILTER = "CLEAR_FILTER";

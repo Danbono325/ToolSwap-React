@@ -1,0 +1,55 @@
+.timeLabels {
+  width: 80%;
+  display: flex;
+  font-size: 13.333px;
+  margin-left: 10%;
+}
+input {
+  width: 80%;
+  padding: 8px 8px;
+  margin: 8px 0px;
+  border: none;
+  border-radius: 6px;
+  background-color: white;
+}
+textarea {
+  width: 80%;
+  padding: 8px 8px;
+  border-radius: 6px;
+  border: 0px;
+  font-family: "Roboto", sans-serif;
+}
+.submitButton {
+  width: 80% !important;
+}
+.card {
+  padding: 1rem;
+  border: #ccc 1px dotted;
+  margin: 0.7rem 0;
+}
+.clearButton {
+  width: 80%;
+  background-color: var(--danger-color);
+  border: 5px;
+  color: black;
+  text-decoration: none;
+  margin: 4px 4px;
+  cursor: pointer;
+  text-align: center;
+  padding: 8px 8px;
+  border-radius: 6px;
+}
+.title {
+  font-weight: bold;
+  margin: 8px;
+}
+.description {
+  background-color: var(--light-color);
+  padding: 4px 4px;
+  border-radius: 4px;
+  margin: 8px;
+}
+span {
+  display: inline-block;
+  margin: 8px 8px;
+}

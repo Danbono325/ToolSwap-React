@@ -1,0 +1,107 @@
+:root {
+  --primary-color: #1bbc86;
+  --secondary-color: #ffff44;
+  --blue-color: #428bca;
+  --dark-color: #333333;
+  --light-color: #f4f4f4;
+  --danger-color: #fe5e51;
+  --warning-color: #fffb96;
+  --success-color: #28a745;
+}
+body {
+  font-family: "Roboto", sans-serif;
+}
+.container {
+  max-width: 1100px;
+  margin: auto;
+  overflow: hidden;
+  padding: 0 2rem;
+}
+
+.column {
+  float: left;
+  padding: 10px;
+}
+.column.left {
+  width: 30%;
+}
+.column.right {
+  width: 60%;
+}
+
+.alert {
+  padding: 0.5rem;
+  margin: 5vh 0;
+  opacity: 0.9;
+  background: #fffb96;
+  color: black;
+  border-radius: 4px;
+}
+
+.btn {
+  display: inline-block;
+  background: var(--light-color);
+  color: #333;
+  padding: 0.4rem 1.3rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: opacity 0.2s ease-in;
+  outline: none;
+  width: 20%;
+}
+
+.btn-light,
+.alert-light {
+  background: var(--light-color);
+  color: #333;
+}
+
+.btn-primary {
+  background: var(--primary-color);
+  color: #333;
+}
+
+.btn-secondary {
+  background: var(--secondary-color);
+  color: #333;
+}
+
+.alert-warning {
+  background: var(--warning-color);
+  color: #333;
+}
+
+.btn-dark,
+.alert-dark {
+  background: var(--dark-color);
+  color: #fff;
+}
+
+.btn-danger,
+.alert-danger {
+  background: var(--danger-color);
+  color: #fff;
+}
+
+.btn-blue {
+  background: var(--blue-color);
+  color: #fff;
+}
+
+.alert-success {
+  background: var(--success-color);
+  color: #fff;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: space-between;
+  margin-left: 8px;
+  margin-right: 8px;
+}
+
+p {
+  margin-left: 0.3rem;
+}

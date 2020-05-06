@@ -1,17 +1,16 @@
 form {
-  border-radius: 10px;
+  border-radius: 6px;
   background-color: lightgray;
   color: black;
   padding: 20px;
   margin-right: auto;
   margin-left: auto;
-  margin-top: 50px;
+  margin-top: 5vh;
   text-align: center;
 }
 
 h2 {
   margin-top: 0px;
-  margin-bottom: 20px;
 }
 
 input {
@@ -23,7 +22,16 @@ input {
   background-color: white;
 }
 
+.psw {
+  text-align-last: right;
+}
+
+a {
+  width: 50%;
+}
+
 input[type="submit"] {
+  width: 53%;
   background-color: #1bbc86;
   border: 5px;
   color: black;
@@ -32,8 +40,24 @@ input[type="submit"] {
   cursor: pointer;
 }
 
-.signinButton {
-  background-color: #ffff44 !important;
+.register {
+  width: 100% !important;
+}
+
+.registerButton {
+  width: 100%;
+  background-color: #ffff44;
+  border: 5px;
+  color: black;
+  text-decoration: none;
+  margin: 4px 4px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.registerButton:hover {
+  background-color: black;
+  color: white;
 }
 
 input[type="submit"]:hover {
@@ -48,11 +72,10 @@ input[type="checkbox"] {
 }
 
 .options {
-  width: 75.5%;
+  width: 75%;
   display: flex;
   justify-content: space-between;
-  margin-left: auto;
-  margin-right: auto;
+  margin: auto;
 }
 
 .buttons {

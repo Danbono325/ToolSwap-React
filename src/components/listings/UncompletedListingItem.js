@@ -1,16 +1,8 @@
-import React, { useEffect, useContext } from "react";
-import ListingContext from "../../context/listings/listingContext";
+import React from "react";
+import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
 const UncompletedListingItem = ({ listing, showButton }) => {
-  const listingContext = useContext(ListingContext);
-
-  const { getUncompletedListings } = listingContext;
-
-  useEffect(() => {
-    getUncompletedListings();
-    // eslint-disable-next-line
-  }, []);
-
   const {
     listingID,
     title,
@@ -20,8 +12,6 @@ const UncompletedListingItem = ({ listing, showButton }) => {
     expectedMonths,
     expectedYears,
   } = listing;
-
-  const onBid = () => {};
 
   return (
     <div className="card">
@@ -34,12 +24,17 @@ const UncompletedListingItem = ({ listing, showButton }) => {
       {expectedDays > 0 && <span>{expectedDays} Days </span>}
       <div className="buttonContainer">
         {showButton && (
-          <button className="btn btn-primary" onClick={onBid}>
-            Bid
-          </button>
+          <Link to={`/placebid/${listingID}`}>
+            <button className="btn btn-primary buttonLink">Bid</button>
+          </Link>
         )}
+        <button className="btn btn-blue">Message</button>
       </div>
     </div>
   );
+};
+UncompletedListingItem.propTypes = {
+  listing: PropTypes.object.isRequired,
+  showButton: PropTypes.bool.isRequired,
 };
 export default UncompletedListingItem;

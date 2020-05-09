@@ -24,7 +24,7 @@ const MyListings = () => {
         <ListingForm />
       </div>
       <div className="column right">
-        <MyListingsList />
+        <MyListingsList showButtons={true} />
       </div>
     </div>
   );

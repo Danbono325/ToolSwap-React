@@ -8,12 +8,15 @@ import Home from "./components/pages/Home";
 import MyListings from "./components/pages/MyListings";
 import Account from "./components/pages/Account";
 import PlaceBid from "./components/pages/PlaceBid";
+import MyBids from "./components/pages/MyBids";
+import ListingBids from "./components/pages/ListingBids";
 
 import Alerts from "./components/layout/Alerts";
 
 import AuthState from "./context/auth/AuthState";
 import AlertState from "./context/alert/AlertState";
 import ListingState from "./context/listings/ListingState";
+import BidState from "./context/bids/BidState";
 
 import PrivateRoute from "./components/routing/PrivateRoute";
 
@@ -28,22 +31,38 @@ const App = () => {
   return (
     <AuthState>
       <ListingState>
-        <AlertState>
-          <Router>
-            <Header name="ToolSwap" />
-            <div className="container">
-              <Alerts />
-              <Switch>
-                <PrivateRoute exact path="/" component={Home} />
-                <PrivateRoute exact path="/account" component={Account} />
-                <PrivateRoute exact path="/MyListings" component={MyListings} />
-                <Route exact path="/placebid" component={PlaceBid} />
-                <Route exact path="/login" component={Login} />
-                <Route exact path="/register" component={Register} />
-              </Switch>
-            </div>
-          </Router>
-        </AlertState>
+        <BidState>
+          <AlertState>
+            <Router>
+              <Header name="ToolSwap" />
+              <div className="container">
+                <Alerts />
+                <Switch>
+                  <PrivateRoute exact path="/" component={Home} />
+                  <PrivateRoute exact path="/account" component={Account} />
+                  <PrivateRoute
+                    exact
+                    path="/MyListings"
+                    component={MyListings}
+                  />
+                  <PrivateRoute exact path="/MyBids" component={MyBids} />
+                  <PrivateRoute
+                    exact
+                    path="/placebid/:listing"
+                    component={PlaceBid}
+                  />
+                  <PrivateRoute
+                    exact
+                    path="/listingbids/:listing"
+                    component={ListingBids}
+                  />
+                  <Route exact path="/login" component={Login} />
+                  <Route exact path="/register" component={Register} />
+                </Switch>
+              </div>
+            </Router>
+          </AlertState>
+        </BidState>
       </ListingState>
     </AuthState>
   );

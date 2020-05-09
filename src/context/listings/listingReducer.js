@@ -18,6 +18,12 @@ export default (state, action) => {
         listings: action.payload,
         loading: false,
       };
+    case GET_LISTING:
+      return {
+        ...state,
+        listing: action.payload,
+        loading: false,
+      };
     case ADD_LISTING:
       return {
         ...state,
@@ -57,5 +63,7 @@ export default (state, action) => {
         ...state,
         error: action.payload,
       };
+    default:
+      return state;
   }
 };

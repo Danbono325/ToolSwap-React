@@ -19,18 +19,26 @@ import {
 const ListingState = (props) => {
   const initialState = {
     listings: [],
+    listing: null,
     current: null,
     error: null,
   };
 
   const [state, dispatch] = useReducer(ListingReducer, initialState);
 
+  // GET LISTING DETAILS
+  const getListing = async (id) => {
+    try {
+      const res = await axios.get(`/listing/readListing.php?listing_id=${id}`);
+
+      dispatch({ type: GET_LISTING, payload: res.data["data"][0] });
+    } catch (err) {
+      dispatch({ type: LISTING_ERROR, payload: err.response.Message });
+    }
+  };
+
   // ADD LISTING
   const addListing = async (listing, id) => {
-    // listing.id = uuidv4();
-    // dispatch({ type: ADD_LISTING, payload: listing });
-    // state.listings = state.listings.push(listing);
-
     const config = {
       headers: {
         "Content-Type": "application/json",
@@ -39,7 +47,7 @@ const ListingState = (props) => {
 
     try {
       const res = await axios.post(
-        "/listing/create.php?user_id=" + id,
+        `/listing/create.php?user_id=${id}`,
         listing,
         config
       );
@@ -62,10 +70,10 @@ const ListingState = (props) => {
     try {
       // UPDATE ON BACKEND
       await axios.put(
-        "/listing/update.php?user_id=" +
-          user_id +
-          "&listing_id=" +
-          listing.listingID,
+        `/listing/update.php?user_id=
+          ${user_id}
+          &listing_id=
+          ${listing.listingID}`,
         listing,
         config
       );
@@ -88,7 +96,7 @@ const ListingState = (props) => {
   // GET USER'S LISTINGS
   const getUsersListings = async (id) => {
     // Get All Users Listings from backend (id)
-    const res = await axios.get("/listing/readUsersListings.php?user_id=" + id);
+    const res = await axios.get(`/listing/readUsersListings.php?user_id=${id}`);
 
     //Alter Dispatch
     dispatch({ type: GET_LISTINGS, payload: res.data["data"] });
@@ -103,7 +111,7 @@ const ListingState = (props) => {
     try {
       // DELETE ON BACKEND
       await axios.delete(
-        "/listing/delete.php?user_id=" + iduser + "&listing_id=" + id
+        `/listing/delete.php?user_id=${iduser}&listing_id=${id}`
       );
 
       dispatch({ type: DELETE_LISTING, payload: id });
@@ -115,12 +123,11 @@ const ListingState = (props) => {
   // GET ALL UNCOMPLETED LISTINGS
   const getUncompletedListings = async () => {
     // Get all Uncompleted Listings for Home page
-    const res = await axios.get("/listing/readUncompleted.php");
+    const res = await axios.get(`/listing/readUncompleted.php`);
 
     dispatch({ type: GET_LISTINGS, payload: res.data["data"] });
   };
 
-  // GET LISTING DETAILS
   // UPDATE LISTING AS COMPLETED
   // UPDATE LISTING AS SUBCONTRACTED
 
@@ -128,6 +135,7 @@ const ListingState = (props) => {
     <ListingContext.Provider
       value={{
         listings: state.listings,
+        listing: state.listing,
         current: state.current,
         error: state.error,
         setCurrent,
@@ -137,6 +145,7 @@ const ListingState = (props) => {
         getUsersListings,
         deleteListing,
         getUncompletedListings,
+        getListing,
       }}
     >
       {props.children}

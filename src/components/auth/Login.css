@@ -26,10 +26,6 @@ input {
   text-align-last: right;
 }
 
-a {
-  width: 50%;
-}
-
 input[type="submit"] {
   width: 53%;
   background-color: #1bbc86;
@@ -40,12 +36,8 @@ input[type="submit"] {
   cursor: pointer;
 }
 
-.register {
-  width: 100% !important;
-}
-
 .registerButton {
-  width: 100%;
+  width: 200%;
   background-color: #ffff44;
   border: 5px;
   color: black;

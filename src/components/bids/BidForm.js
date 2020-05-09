@@ -1,32 +1,71 @@
-import React, { useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
+import AuthContext from "../../context/auth/authContext";
+import BidContext from "../../context/bids/bidContext";
 
-const BidForm = () => {
+const BidForm = ({ listing, edit }) => {
+  const authContext = useContext(AuthContext);
+  const bidContext = useContext(BidContext);
+
+  const { user } = authContext;
+  const { current, createBid, updateBid, clearCurrent } = bidContext;
+
+  useEffect(() => {
+    if (current != null) {
+      setBid(current);
+    } else {
+      setBid({
+        amount: "",
+        message: "",
+        estimatedTimeDays: 0,
+        estimatedTimeWeeks: 0,
+        estimatedTimeMonths: 0,
+        estimatedTimeYears: 0,
+      });
+    }
+  }, [bidContext, current]);
+
   const [bid, setBid] = useState({
     amount: "",
     message: "",
-    estimatedDays: 0,
-    estimatedWeeks: 0,
-    estimatedMonths: 0,
-    estimatedYears: 0,
+    estimatedTimeDays: 0,
+    estimatedTimeWeeks: 0,
+    estimatedTimeMonths: 0,
+    estimatedTimeYears: 0,
   });
 
   const {
     amount,
     message,
-    estimatedDays,
-    estimatedWeeks,
-    estimatedMonths,
-    estimatedYears,
+    estimatedTimeDays,
+    estimatedTimeWeeks,
+    estimatedTimeMonths,
+    estimatedTimeYears,
   } = bid;
 
   const onChange = (e) => setBid({ ...bid, [e.target.name]: e.target.value });
 
-  const onSubmit = () => {};
+  const onSubmit = (e) => {
+    e.preventDefault();
+    if (!edit) {
+      createBid(bid, user.user_id, listing.listingID);
+    } else {
+      updateBid(bid, user.user_id);
+      clearCurrent();
+    }
+    setBid({
+      amount: "",
+      message: "",
+      estimatedTimeDays: 0,
+      estimatedTimeWeeks: 0,
+      estimatedTimeMonths: 0,
+      estimatedTimeYears: 0,
+    });
+  };
 
   return (
     <div>
-      <form onSubmit={onSubmit} id="listingForm">
-        <h2>Add Bid</h2>
+      <form onSubmit={onSubmit} id="bidForm">
+        <h2>{edit ? "Edit Bid" : "Add Bid"}</h2>
         <input
           type="text"
           name="amount"
@@ -40,8 +79,8 @@ const BidForm = () => {
         </label>
         <input
           type="number"
-          name="estimatedDays"
-          value={estimatedDays}
+          name="estimatedTimeDays"
+          value={estimatedTimeDays}
           onChange={onChange}
           id="days"
           min="0"
@@ -52,8 +91,8 @@ const BidForm = () => {
         </label>
         <input
           type="number"
-          name="estimatedWeeks"
-          value={estimatedWeeks}
+          name="estimatedTimeWeeks"
+          value={estimatedTimeWeeks}
           onChange={onChange}
           id="weeks"
           min="0"
@@ -64,8 +103,8 @@ const BidForm = () => {
         </label>
         <input
           type="number"
-          name="estimatedMonths"
-          value={estimatedMonths}
+          name="estimatedTimeMonths"
+          value={estimatedTimeMonths}
           onChange={onChange}
           id="months"
           min="0"
@@ -76,8 +115,8 @@ const BidForm = () => {
         </label>
         <input
           type="number"
-          name="estimatedYears"
-          value={estimatedYears}
+          name="estimatedTimeYears"
+          value={estimatedTimeYears}
           onChange={onChange}
           id="years"
           min="0"
@@ -89,15 +128,15 @@ const BidForm = () => {
           name="message"
           value={message}
           onChange={onChange}
-          placeholder="Description..."
-          form="listingForm"
+          placeholder="Message..."
+          form="bidForm"
           required
         />
         <input
           className="submitButton"
           type="submit"
           name="addBid"
-          value="Add Bid"
+          value={edit ? "Edit Bid" : "Add Bid"}
         />
       </form>
     </div>

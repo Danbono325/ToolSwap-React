@@ -47,6 +47,7 @@ const ListingForm = () => {
     setListing({ ...listing, [e.target.name]: e.target.value });
 
   const clearAll = (e) => {
+    e.preventDefault();
     clearCurrent();
   };
 

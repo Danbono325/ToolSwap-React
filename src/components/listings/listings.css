@@ -27,6 +27,9 @@ textarea {
   border: #ccc 1px dotted;
   margin: 0.7rem 0;
 }
+.card-edit {
+  background-color: lightgray;
+}
 .clearButton {
   width: 80%;
   background-color: var(--danger-color);
@@ -52,4 +55,10 @@ textarea {
 span {
   display: inline-block;
   margin: 8px 8px;
+}
+a {
+  width: 20%;
+}
+.buttonLink {
+  width: 100% !important;
 }

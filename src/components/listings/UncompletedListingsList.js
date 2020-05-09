@@ -1,11 +1,16 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import UncompletedListingItem from "./UncompletedListingItem";
 import ListingContext from "../../context/listings/listingContext";
 
 const UncompletedListingsList = () => {
   const listingContext = useContext(ListingContext);
 
-  const { listings } = listingContext;
+  const { listings, getUncompletedListings } = listingContext;
+
+  useEffect(() => {
+    getUncompletedListings();
+    // eslint-disable-next-line
+  }, []);
 
   return listings.map((listing) => (
     <UncompletedListingItem

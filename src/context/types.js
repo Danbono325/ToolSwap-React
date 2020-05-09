@@ -31,7 +31,7 @@ export const UPDATE_ASCOMPLETED = "UPDATE_ASCOMPLETED";
 
 // BIDS
 export const CREATE_BID = "CREATE_BID";
-export const GETUSER_BIDS = "GETUSER_BIDS";
+export const GETUSERS_BIDS = "GETUSER_BIDS";
 export const GETLISTING_BIDS = "GETLISTING_BIDS";
 export const UPDATE_BID = "UPDATE_BID";
 export const DELETE_BID = "DELETE_BID";

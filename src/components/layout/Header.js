@@ -27,6 +27,9 @@ const Header = ({ name }) => {
         <Link to="/MyListings">My Listings</Link>
       </li>
       <li>
+        <Link to="/MyBids">My Bids</Link>
+      </li>
+      <li>
         <Link to="/account">Account</Link>
       </li>
       <li>

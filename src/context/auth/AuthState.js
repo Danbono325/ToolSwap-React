@@ -15,12 +15,13 @@ import {
   CLEAR_ERRORS,
   UPDATE_SUCCESS,
   UPDATE_FAILED,
+  RESET_LOADING,
 } from "../types";
 
 const AuthState = (props) => {
   const initialState = {
     token: localStorage.getItem("token"),
-    isAuthenticated: null,
+    isAuthenticated: localStorage.getItem("isAuthenticated"),
     loading: true,
     user: null,
     error: null,
@@ -73,6 +74,8 @@ const AuthState = (props) => {
 
   // Load User
   const loadUser = async (id) => {
+    resetLoading();
+
     if (localStorage.token) {
       setAuthToken(localStorage.token);
     }
@@ -117,6 +120,8 @@ const AuthState = (props) => {
   };
 
   // Delete Account
+
+  const resetLoading = () => dispatch({ type: RESET_LOADING });
 
   return (
     <AuthContext.Provider

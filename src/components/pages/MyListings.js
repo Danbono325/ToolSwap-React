@@ -7,11 +7,11 @@ import AuthContext from "../../context/auth/authContext";
 const MyListings = () => {
   const authContext = useContext(AuthContext);
 
-  const { loadUser, user, isAuthenticated } = authContext;
+  const { loadUser, isAuthenticated } = authContext;
 
   useEffect(() => {
     if (isAuthenticated) {
-      loadUser(user.user_id);
+      loadUser(localStorage.getItem("idUser"));
     } else {
       loadUser(0);
     }

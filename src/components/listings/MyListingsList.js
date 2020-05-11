@@ -2,18 +2,15 @@ import React, { useContext, useEffect } from "react";
 import MyListingItem from "./MyListingItem";
 import Spinner from "../layout/Spinner";
 import PropTypes from "prop-types";
-import AuthContext from "../../context/auth/authContext";
 import ListingContext from "../../context/listings/listingContext";
 
 const MyListingsList = ({ showButtons }) => {
-  const authContext = useContext(AuthContext);
   const listingContext = useContext(ListingContext);
 
-  const { user } = authContext;
   const { getUsersListings, listings, loading } = listingContext;
 
   useEffect(() => {
-    getUsersListings(user.user_id);
+    getUsersListings(localStorage.getItem("idUser"));
     // eslint-disable-next-line
   }, []);
 

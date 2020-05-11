@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState, Fragment } from "react";
+import Spinner from "../layout/Spinner";
 import AuthContext from "../../context/auth/authContext";
 import AlertContext from "../../context/alert/alertContext";
-// import ReactDOM from "react-dom";
 import Modal from "react-modal";
 
 import "./account.css";
@@ -38,7 +38,7 @@ const Account = () => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      loadUser(user.user_id);
+      loadUser(localStorage.getItem("idUser"));
     }
 
     // eslint-disable-next-line
@@ -92,7 +92,7 @@ const Account = () => {
     setIsOpen(false);
   }
 
-  return (
+  return !loading ? (
     <div>
       <div>
         <h2 className="editHeader">
@@ -209,6 +209,8 @@ const Account = () => {
         </button>
       )}
     </div>
+  ) : (
+    <Spinner />
   );
 };
 

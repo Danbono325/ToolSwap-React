@@ -13,11 +13,11 @@ const MyBids = () => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      loadUser(user.user_id);
+      loadUser(localStorage.getItem("idUser"));
     } else {
       loadUser(0);
     }
-    getUsersBids(user.user_id);
+    getUsersBids(localStorage.getItem("idUser"));
     // eslint-disable-next-line
   }, []);
 

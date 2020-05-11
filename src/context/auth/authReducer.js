@@ -9,6 +9,7 @@ import {
   CLEAR_ERRORS,
   UPDATE_SUCCESS,
   UPDATE_FAILED,
+  RESET_LOADING,
 } from "../types";
 
 export default (state, action) => {
@@ -23,6 +24,8 @@ export default (state, action) => {
     case REGISTER_SUCCESS:
     case LOGIN_SUCCESS:
       localStorage.setItem("token", action.payload.jwt);
+      localStorage.setItem("idUser", action.payload.user.user_id);
+      localStorage.setItem("isAuthenticated", "true");
       return {
         ...state,
         ...action.payload,
@@ -35,6 +38,8 @@ export default (state, action) => {
     case LOGIN_FAIL:
     case LOGOUT:
       localStorage.removeItem("token");
+      localStorage.setItem("isAuthenticated", "false");
+      localStorage.removeItem("idUser");
       return {
         ...state,
         token: null,
@@ -57,6 +62,11 @@ export default (state, action) => {
       return {
         ...state,
         error: null,
+      };
+    case RESET_LOADING:
+      return {
+        ...state,
+        loading: true,
       };
     default:
       return state;

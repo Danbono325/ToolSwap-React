@@ -68,7 +68,7 @@ export default (state, action) => {
     case CLEAR_LISTINGS:
       return {
         ...state,
-        listings: [],
+        listings: null,
         listing: null,
       };
     case RESET_LOADING:

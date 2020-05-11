@@ -7,13 +7,13 @@ const Home = () => {
   const authContext = useContext(AuthContext);
   const listingContext = useContext(ListingContext);
 
-  const { isAuthenticated, user, loadUser } = authContext;
+  const { loadUser, isAuthenticated } = authContext;
 
   const { getUncompletedListings } = listingContext;
 
   useEffect(() => {
     if (isAuthenticated) {
-      loadUser(user.user_id);
+      loadUser(localStorage.getItem("idUser"));
       getUncompletedListings();
     } else {
       loadUser(0);

@@ -3,14 +3,16 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import AuthContext from "../../context/auth/authContext";
 import ListingContext from "../../context/listings/listingContext";
+import BidContext from "../../context/bids/bidContext";
 
 const MyListingItem = ({ listing, showButtons }) => {
   const authContext = useContext(AuthContext);
   const listingContext = useContext(ListingContext);
+  const bidContext = useContext(BidContext);
 
   const { user } = authContext;
-
   const { setCurrent, deleteListing, clearCurrent } = listingContext;
+  const { clearBids } = bidContext;
 
   const {
     listingID,
@@ -50,7 +52,12 @@ const MyListingItem = ({ listing, showButtons }) => {
             Edit
           </button>
           <Link to={`/listingbids/${listingID}`}>
-            <button className="buttonLink btn btn-blue">Bids</button>
+            <button
+              className="buttonLink btn btn-blue"
+              onClick={() => clearBids()}
+            >
+              Bids
+            </button>
           </Link>
           <button className="btn btn-danger" onClick={onDelete}>
             Delete

@@ -3,31 +3,44 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
 import AuthContext from "../../context/auth/authContext";
+import ListingContext from "../../context/listings/listingContext";
+import BidContext from "../../context/bids/bidContext";
 
 import "./Header.css";
 import Logo from "../../assets/Subtraction3.svg";
 
 const Header = ({ name }) => {
   const authContext = useContext(AuthContext);
+  const listingContext = useContext(ListingContext);
+  const bidContext = useContext(BidContext);
 
   const { isAuthenticated, logout, user } = authContext;
+  const { clearListings } = listingContext;
+  const { clearBids } = bidContext;
 
   const onLogout = () => {
     logout();
     //Clear Listings
+    clearListings();
   };
 
   const authLinks = (
     <Fragment>
       <li className="hello">Hello {user && user.firstname}</li>
       <li>
-        <Link to="/">Home</Link>
+        <Link to="/" onClick={() => clearListings()}>
+          Home
+        </Link>
       </li>
       <li>
-        <Link to="/MyListings">My Listings</Link>
+        <Link to="/MyListings" onClick={() => clearListings()}>
+          My Listings
+        </Link>
       </li>
       <li>
-        <Link to="/MyBids">My Bids</Link>
+        <Link to="/MyBids" onClick={() => clearBids()}>
+          My Bids
+        </Link>
       </li>
       <li>
         <Link to="/account">Account</Link>

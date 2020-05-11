@@ -14,6 +14,8 @@ import {
   SET_CURRENT,
   CLEAR_CURRENT,
   LISTING_ERROR,
+  CLEAR_LISTINGS,
+  RESET_LOADING,
 } from "../types";
 
 const ListingState = (props) => {
@@ -21,6 +23,7 @@ const ListingState = (props) => {
     listings: [],
     listing: null,
     current: null,
+    loading: true,
     error: null,
   };
 
@@ -28,6 +31,8 @@ const ListingState = (props) => {
 
   // GET LISTING DETAILS
   const getListing = async (id) => {
+    resetLoading();
+
     try {
       const res = await axios.get(`/listing/readListing.php?listing_id=${id}`);
 
@@ -59,6 +64,11 @@ const ListingState = (props) => {
     getUsersListings(id);
   };
 
+  // SET CURRENT
+  const setCurrent = (listing) => {
+    dispatch({ type: SET_CURRENT, payload: listing });
+  };
+
   // EDIT/UPDATE LITING
   const updateListing = async (listing, user_id) => {
     const config = {
@@ -71,9 +81,9 @@ const ListingState = (props) => {
       // UPDATE ON BACKEND
       await axios.put(
         `/listing/update.php?user_id=
-          ${user_id}
-          &listing_id=
-          ${listing.listingID}`,
+            ${user_id}
+            &listing_id=
+            ${listing.listingID}`,
         listing,
         config
       );
@@ -83,18 +93,24 @@ const ListingState = (props) => {
     }
   };
 
-  // SET CURRENT
-  const setCurrent = (listing) => {
-    dispatch({ type: SET_CURRENT, payload: listing });
-  };
-
   // CLEAR FORM
   const clearCurrent = () => {
     dispatch({ type: CLEAR_CURRENT });
   };
 
+  // GET ALL UNCOMPLETED LISTINGS
+  const getUncompletedListings = async () => {
+    resetLoading();
+    // Get all Uncompleted Listings for Home page
+    const res = await axios.get(`/listing/readUncompleted.php`);
+
+    dispatch({ type: GET_LISTINGS, payload: res.data["data"] });
+  };
+
   // GET USER'S LISTINGS
   const getUsersListings = async (id) => {
+    resetLoading();
+
     // Get All Users Listings from backend (id)
     const res = await axios.get(`/listing/readUsersListings.php?user_id=${id}`);
 
@@ -120,13 +136,11 @@ const ListingState = (props) => {
     }
   };
 
-  // GET ALL UNCOMPLETED LISTINGS
-  const getUncompletedListings = async () => {
-    // Get all Uncompleted Listings for Home page
-    const res = await axios.get(`/listing/readUncompleted.php`);
-
-    dispatch({ type: GET_LISTINGS, payload: res.data["data"] });
+  const clearListings = () => {
+    dispatch({ type: CLEAR_LISTINGS });
   };
+
+  const resetLoading = () => dispatch({ type: RESET_LOADING });
 
   // UPDATE LISTING AS COMPLETED
   // UPDATE LISTING AS SUBCONTRACTED
@@ -137,6 +151,7 @@ const ListingState = (props) => {
         listings: state.listings,
         listing: state.listing,
         current: state.current,
+        loading: state.loading,
         error: state.error,
         setCurrent,
         clearCurrent,
@@ -146,6 +161,7 @@ const ListingState = (props) => {
         deleteListing,
         getUncompletedListings,
         getListing,
+        clearListings,
       }}
     >
       {props.children}

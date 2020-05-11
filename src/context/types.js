@@ -24,6 +24,7 @@ export const LISTING_ERROR = "LISTINGS_ERROR";
 export const GET_LISTINGS = "GET_LISTINGS";
 export const GET_LISTING = "GET_LISTING";
 export const UPDATE_ASCOMPLETED = "UPDATE_ASCOMPLETED";
+export const CLEAR_LISTINGS = "CLEAR_LISTINGS";
 
 //export const CLEAR_LISTINGS = "CLEAR_LISTINGS";
 //export const FILTER_CONTACTS = "FILTER_CONTACTS";
@@ -36,3 +37,6 @@ export const GETLISTING_BIDS = "GETLISTING_BIDS";
 export const UPDATE_BID = "UPDATE_BID";
 export const DELETE_BID = "DELETE_BID";
 export const BID_ERROR = "BID_ERROR";
+export const CLEAR_BIDS = "CLEAR_BIDS";
+
+export const RESET_LOADING = "RESET_LOADING";

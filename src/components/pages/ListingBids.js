@@ -28,7 +28,7 @@ const ListingBids = ({ match }) => {
   return (
     <div>
       {listing && <MyListingsItem listing={listing} />}
-      {bids && <BidList bids={bids} showButton={false} />}
+      {bids && <BidList bidState={bids} showButton={false} />}
     </div>
   );
 };

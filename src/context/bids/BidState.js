@@ -13,6 +13,8 @@ import {
   DELETE_BID,
   BID_ERROR,
   CLEAR_CURRENT,
+  CLEAR_BIDS,
+  RESET_LOADING,
 } from "../types";
 
 const BidState = (props) => {
@@ -21,6 +23,7 @@ const BidState = (props) => {
     bid: null,
     current: null,
     returnedMessage: null,
+    loading: true,
     error: null,
   };
 
@@ -50,6 +53,8 @@ const BidState = (props) => {
   };
 
   const getUsersBids = async (user_id) => {
+    resetLoading();
+
     if (localStorage.token) {
       setAuthToken(localStorage.token);
     }
@@ -64,6 +69,8 @@ const BidState = (props) => {
   };
 
   const getListingsBids = async (user_id, listing_id) => {
+    resetLoading();
+
     if (localStorage.token) {
       setAuthToken(localStorage.token);
     }
@@ -121,6 +128,12 @@ const BidState = (props) => {
     }
   };
 
+  const clearBids = () => {
+    dispatch({ type: CLEAR_BIDS });
+  };
+
+  const resetLoading = () => dispatch({ type: RESET_LOADING });
+
   return (
     <BidContext.Provider
       value={{
@@ -128,6 +141,7 @@ const BidState = (props) => {
         bid: state.bid,
         current: state.current,
         returnMessage: state.returnMessage,
+        loading: state.loading,
         error: state.error,
         createBid,
         getUsersBids,
@@ -136,6 +150,7 @@ const BidState = (props) => {
         setCurrent,
         clearCurrent,
         updateBid,
+        clearBids,
       }}
     >
       {props.children}

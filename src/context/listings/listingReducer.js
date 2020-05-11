@@ -8,6 +8,8 @@ import {
   SET_CURRENT,
   CLEAR_CURRENT,
   LISTING_ERROR,
+  CLEAR_LISTINGS,
+  RESET_LOADING,
 } from "../types";
 
 export default (state, action) => {
@@ -62,6 +64,17 @@ export default (state, action) => {
       return {
         ...state,
         error: action.payload,
+      };
+    case CLEAR_LISTINGS:
+      return {
+        ...state,
+        listings: [],
+        listing: null,
+      };
+    case RESET_LOADING:
+      return {
+        ...state,
+        loading: true,
       };
     default:
       return state;

@@ -7,6 +7,8 @@ import {
   UPDATE_BID,
   DELETE_BID,
   BID_ERROR,
+  CLEAR_BIDS,
+  RESET_LOADING,
 } from "../types";
 
 export default (state, action) => {
@@ -21,6 +23,7 @@ export default (state, action) => {
       return {
         ...state,
         bids: action.payload,
+        loading: false,
       };
     case SET_CURRENT:
       return {
@@ -44,7 +47,21 @@ export default (state, action) => {
         ...state,
         bids: state.bids.filter((bid) => bid.bidID !== action.payload),
       };
-
+    case CLEAR_BIDS:
+      return {
+        ...state,
+        bids: null,
+      };
+    case RESET_LOADING:
+      return {
+        ...state,
+        loading: true,
+      };
+    case BID_ERROR:
+      return {
+        ...state,
+        error: action.payload,
+      };
     default:
       return state;
   }

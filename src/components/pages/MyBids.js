@@ -27,7 +27,7 @@ const MyBids = () => {
         <BidForm edit={true} />
       </div>
       <div className="column right">
-        <BidList bids={bids} showButtons={true} />
+        <BidList bidState={bids} showButtons={true} />
       </div>
     </div>
   );

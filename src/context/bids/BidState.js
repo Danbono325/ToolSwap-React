@@ -19,7 +19,7 @@ import {
 
 const BidState = (props) => {
   const initialState = {
-    bids: [],
+    bids: null,
     bid: null,
     current: null,
     returnedMessage: null,

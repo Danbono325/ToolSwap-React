@@ -22,7 +22,6 @@ const BidList = ({ bidState, showButtons }) => {
   );
 };
 BidList.propTypes = {
-  bids: PropTypes.array.isRequired,
   showButtons: PropTypes.bool.isRequired,
 };
 export default BidList;

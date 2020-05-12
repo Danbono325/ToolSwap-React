@@ -105,3 +105,17 @@ body {
 p {
   margin-left: 0.3rem;
 }
+
+.skillItem {
+  background-color: lightgray;
+  border-radius: 12px;
+  font-size: medium;
+  padding: 0px !important;
+}
+
+.removeButton {
+  border: none;
+  background-color: lightgray;
+  cursor: pointer;
+  /* width: 2%; */
+}

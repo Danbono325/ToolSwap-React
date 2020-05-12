@@ -8,7 +8,7 @@ const MyBids = () => {
   const authContext = useContext(AuthContext);
   const bidContext = useContext(BidContext);
 
-  const { isAuthenticated, user, loadUser } = authContext;
+  const { isAuthenticated, loadUser } = authContext;
   const { getUsersBids, bids } = bidContext;
 
   useEffect(() => {

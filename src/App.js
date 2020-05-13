@@ -10,6 +10,7 @@ import Account from "./components/pages/Account";
 import PlaceBid from "./components/pages/PlaceBid";
 import MyBids from "./components/pages/MyBids";
 import ListingBids from "./components/pages/ListingBids";
+import User from "./components/pages/User";
 
 import Alerts from "./components/layout/Alerts";
 
@@ -58,6 +59,7 @@ const App = () => {
                       path="/listingbids/:listing"
                       component={ListingBids}
                     />
+                    <PrivateRoute exact path="/user/:user" component={User} />
                     <Route exact path="/login" component={Login} />
                     <Route exact path="/register" component={Register} />
                   </Switch>

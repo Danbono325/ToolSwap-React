@@ -4,7 +4,13 @@ import SkillContext from "./skillContext";
 import SkillReducer from "./skillReducer";
 import setAuthToken from "../../utils/setAuthToken";
 
-import { ADD_SKILL, REMOVE_SKILL, GET_SKILLS, RESET_LOADING } from "../types";
+import {
+  ADD_SKILL,
+  REMOVE_SKILL,
+  GET_SKILLS,
+  RESET_LOADING,
+  CLEAR_SKILLS,
+} from "../types";
 
 const SkillState = (props) => {
   const initialState = {
@@ -58,6 +64,8 @@ const SkillState = (props) => {
 
   const resetLoading = () => dispatch({ type: RESET_LOADING });
 
+  const clearSkills = () => dispatch({ type: CLEAR_SKILLS });
+
   return (
     <SkillContext.Provider
       value={{
@@ -67,6 +75,7 @@ const SkillState = (props) => {
         addSkill,
         removeSkill,
         getUsersSkills,
+        clearSkills,
       }}
     >
       {props.children}

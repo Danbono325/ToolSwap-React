@@ -11,6 +11,7 @@ const UncompletedListingItem = ({ listing, showButton }) => {
     expectedWeeks,
     expectedMonths,
     expectedYears,
+    userID,
   } = listing;
 
   return (
@@ -28,7 +29,9 @@ const UncompletedListingItem = ({ listing, showButton }) => {
             <button className="btn btn-primary buttonLink">Bid</button>
           </Link>
         )}
-        <button className="btn btn-blue">Message</button>
+        <Link to={`/user/${userID}`}>
+          <button className="btn btn-blue buttonLink">Contact</button>
+        </Link>
       </div>
     </div>
   );

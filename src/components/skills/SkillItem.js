@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import Remove from "./remove.svg";
+import Remove from "../../assets/remove.svg";
 import SkillContext from "../../context/skill/skillContext";
 
 const SkillItem = ({ showButton, skill }) => {

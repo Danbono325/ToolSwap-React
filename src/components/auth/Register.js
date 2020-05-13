@@ -116,7 +116,7 @@ const Register = (props) => {
           type="submit"
           className="registerButton register"
           name="signup"
-          value="REGISTER"
+          value="Register"
         />
       </div>
     </form>

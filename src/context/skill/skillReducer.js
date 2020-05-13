@@ -1,4 +1,10 @@
-import { ADD_SKILL, REMOVE_SKILL, GET_SKILLS, RESET_LOADING } from "../types";
+import {
+  ADD_SKILL,
+  REMOVE_SKILL,
+  GET_SKILLS,
+  RESET_LOADING,
+  CLEAR_SKILLS,
+} from "../types";
 
 export default (state, action) => {
   switch (action.type) {
@@ -23,6 +29,11 @@ export default (state, action) => {
       return {
         ...state,
         loading: true,
+      };
+    case CLEAR_SKILLS:
+      return {
+        ...state,
+        skills: null,
       };
     default:
       return {

@@ -16,19 +16,19 @@ const ListingBids = ({ match }) => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      loadUser(user.user_id);
+      loadUser(localStorage.getItem("idUser"));
     } else {
       loadUser(0);
     }
     getListing(match.params.listing);
-    getListingsBids(user.user_id, match.params.listing);
+    getListingsBids(localStorage.getItem("idUser"), match.params.listing);
     // eslint-disable-next-line
   }, []);
 
   return (
     <div>
       {listing && <MyListingsItem listing={listing} />}
-      {bids && <BidList bidState={bids} showButton={false} />}
+      {bids && <BidList bidState={bids} showButtons={false} />}
     </div>
   );
 };

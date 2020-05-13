@@ -101,7 +101,7 @@ const Profile = () => {
         {edit ? (
           <input
             type="text"
-            value={user && user.username}
+            value={username}
             name="username"
             onChange={onChange}
             className="editInput"
@@ -111,7 +111,7 @@ const Profile = () => {
         ) : (
           <p className="solid">
             <span className="lab">Username</span>
-            <span>{username}</span>
+            <span>{user && user.username}</span>
           </p>
         )}
         {edit ? (

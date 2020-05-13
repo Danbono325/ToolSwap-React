@@ -41,8 +41,8 @@ export const CLEAR_BIDS = "CLEAR_BIDS";
 
 export const RESET_LOADING = "RESET_LOADING";
 
-//SKILLS
-
+// SKILLS
 export const ADD_SKILL = "ADD_SKILL";
 export const REMOVE_SKILL = "REMOVE_SKILL";
 export const GET_SKILLS = "GET_SKILLS";
+export const CLEAR_SKILLS = "CLEAR_SKILLS";

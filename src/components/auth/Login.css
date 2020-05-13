@@ -27,7 +27,7 @@ input {
 }
 
 input[type="submit"] {
-  width: 53%;
+  width: 50%;
   background-color: #1bbc86;
   border: 5px;
   color: black;
@@ -37,7 +37,7 @@ input[type="submit"] {
 }
 
 .registerButton {
-  width: 200%;
+  width: 235% !important;
   background-color: #ffff44;
   border: 5px;
   color: black;

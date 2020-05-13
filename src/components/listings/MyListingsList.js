@@ -14,6 +14,10 @@ const MyListingsList = ({ showButtons }) => {
     // eslint-disable-next-line
   }, []);
 
+  if (listings !== null && listings.length === 0 && !loading) {
+    return <h4 style={{ textAlign: "center" }}>No listings yet, add one.</h4>;
+  }
+
   return listings !== null && !loading ? (
     listings.map((listing) => (
       <MyListingItem

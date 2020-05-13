@@ -19,7 +19,7 @@ const SkillForm = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    if (skill === "") {
+    if (description === "") {
       setAlert("Please add a skill.", "warning");
     } else {
       addSkill(localStorage.getItem("idUser"), skill);

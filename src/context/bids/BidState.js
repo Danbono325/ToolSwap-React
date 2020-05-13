@@ -20,7 +20,7 @@ import {
 const BidState = (props) => {
   const initialState = {
     bids: null,
-    bid: null,
+    bid: {},
     current: null,
     returnedMessage: null,
     loading: true,

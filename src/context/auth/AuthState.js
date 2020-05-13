@@ -8,6 +8,7 @@ import {
   REGISTER_SUCCESS,
   REGISTER_FAIL,
   USER_LOADED,
+  GET_USER,
   AUTH_ERROR,
   LOGIN_SUCCESS,
   LOGIN_FAIL,
@@ -24,6 +25,7 @@ const AuthState = (props) => {
     isAuthenticated: localStorage.getItem("isAuthenticated"),
     loading: true,
     user: null,
+    user_: {},
     error: null,
   };
 
@@ -91,6 +93,11 @@ const AuthState = (props) => {
     }
   };
 
+  const getUser = async (user_id) => {
+    const res = await axios.get(`/user/read.php?user_id=${user_id}`);
+    dispatch({ type: GET_USER, payload: res.data["data"][0] });
+  };
+
   // Clear Errors
   const clearErrors = () => dispatch({ type: CLEAR_ERRORS });
 
@@ -130,6 +137,7 @@ const AuthState = (props) => {
         isAuthenticated: state.isAuthenticated,
         loading: state.loading,
         user: state.user,
+        user_: state.user_,
         error: state.error,
         register,
         loadUser,
@@ -137,6 +145,7 @@ const AuthState = (props) => {
         login,
         logout,
         clearErrors,
+        getUser,
       }}
     >
       {props.children}

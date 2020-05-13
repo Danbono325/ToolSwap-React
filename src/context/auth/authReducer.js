@@ -2,6 +2,7 @@ import {
   REGISTER_SUCCESS,
   REGISTER_FAIL,
   USER_LOADED,
+  GET_USER,
   AUTH_ERROR,
   LOGIN_SUCCESS,
   LOGIN_FAIL,
@@ -46,7 +47,13 @@ export default (state, action) => {
         isAuthenticated: false,
         loading: false,
         user: null,
+        user: {},
         error: action.payload,
+      };
+    case GET_USER:
+      return {
+        ...state,
+        user_: action.payload,
       };
     case UPDATE_SUCCESS:
       return {

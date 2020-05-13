@@ -21,7 +21,7 @@ import {
 const ListingState = (props) => {
   const initialState = {
     listings: null,
-    listing: null,
+    listing: {},
     current: null,
     loading: true,
     error: null,

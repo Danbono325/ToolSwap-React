@@ -69,7 +69,7 @@ export default (state, action) => {
       return {
         ...state,
         listings: null,
-        listing: null,
+        listing: {},
       };
     case RESET_LOADING:
       return {

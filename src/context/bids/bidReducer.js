@@ -51,7 +51,7 @@ export default (state, action) => {
       return {
         ...state,
         bids: null,
-        bid: null,
+        bid: {},
       };
     case RESET_LOADING:
       return {

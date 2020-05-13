@@ -9,7 +9,7 @@ const Account = () => {
   const authContext = useContext(AuthContext);
   const skillContext = useContext(SkillContext);
 
-  const { isAuthenticated, loadUser } = authContext;
+  const { isAuthenticated, loadUser, user } = authContext;
   const { skills, getUsersSkills } = skillContext;
 
   useEffect(() => {
@@ -26,7 +26,7 @@ const Account = () => {
     <div>
       <SkillForm />
       <SkillList skillState={skills} showButton={true} />
-      <Profile />
+      <Profile user={user} showButton={true} />
     </div>
   );
 };

@@ -2,6 +2,8 @@ import React, { useContext, useEffect, useState, Fragment } from "react";
 import Spinner from "../layout/Spinner";
 import AuthContext from "../../context/auth/authContext";
 import AlertContext from "../../context/alert/alertContext";
+import PropTypes from "prop-types";
+
 import Modal from "react-modal";
 
 import "./account.css";
@@ -21,12 +23,11 @@ const customStyles = {
 // Make sure to bind modal to your appElement (http://reactcommunity.org/react-modal/accessibility/)
 Modal.setAppElement("#root");
 
-const Profile = () => {
+const Profile = ({ user, showButton }) => {
   const authContext = useContext(AuthContext);
   const alertContext = useContext(AlertContext);
 
   const {
-    user,
     isAuthenticated,
     loading,
     loadUser,
@@ -99,119 +100,116 @@ const Profile = () => {
           {edit ? "Edit Profile" : "Account Profile"}
         </h2>
         {edit ? (
-          <input
-            type="text"
-            value={username}
-            name="username"
-            onChange={onChange}
-            className="editInput"
-            placeholder="Username..."
-            required
-          />
-        ) : (
-          <p className="solid">
-            <span className="lab">Username</span>
-            <span>{user && user.username}</span>
-          </p>
-        )}
-        {edit ? (
-          <input
-            type="text"
-            name="firstname"
-            value={firstname}
-            onChange={onChange}
-            className="editInput"
-            required
-          />
-        ) : (
-          <p className="solid">
-            <span className="lab">First Name</span>
-            <span>{user && user.firstname}</span>
-          </p>
-        )}
-        {edit ? (
-          <input
-            type="text"
-            name="lastname"
-            value={lastname}
-            onChange={onChange}
-            className="editInput"
-            required
-          />
-        ) : (
-          <p className="solid">
-            <span className="lab">Last Name</span>
-            <span>{user && user.lastname}</span>
-          </p>
-        )}
-
-        {edit ? (
-          <input
-            type="text"
-            name="email"
-            value={email}
-            onChange={onChange}
-            className="editInput"
-            placeholder="Email..."
-            required
-          />
-        ) : (
-          <p className="solid">
-            <span className="lab">Email</span>
-            <span>{user && user.email}</span>
-          </p>
-        )}
-      </div>
-      {edit ? (
-        <Fragment>
-          <button className="btn btn-secondary mr-2" onClick={openModal}>
-            Edit
-          </button>
-          <Modal
-            isOpen={modalIsOpen}
-            onRequestClose={closeModal}
-            style={customStyles}
-            contentLabel="Confirm with Password"
-          >
-            <h2>Confirm Profile Edit</h2>
-            <form className="modalForm">
-              <input
-                type="text"
-                name="password"
-                value={password}
-                onChange={changePass}
-                placeholder="Account Password..."
-                required
-              />
-            </form>
-            <div className="buttonContainer">
-              <button
-                onClick={onSubmit}
-                className="btn btn-primary modalButtons"
-              >
-                Confirm
+          <Fragment>
+            <input
+              type="text"
+              value={username}
+              name="username"
+              onChange={onChange}
+              className="editInput"
+              placeholder="Username..."
+              required
+            />
+            <input
+              type="text"
+              name="firstname"
+              value={firstname}
+              onChange={onChange}
+              className="editInput"
+              required
+            />
+            <input
+              type="text"
+              name="lastname"
+              value={lastname}
+              onChange={onChange}
+              className="editInput"
+              required
+            />
+            <input
+              type="text"
+              name="email"
+              value={email}
+              onChange={onChange}
+              className="editInput"
+              placeholder="Email..."
+              required
+            />
+            <Fragment>
+              <button className="btn btn-secondary mr-2" onClick={openModal}>
+                Edit
               </button>
-              <button
-                onClick={closeModal}
-                className="btn btn-danger modalButtons"
+              <Modal
+                isOpen={modalIsOpen}
+                onRequestClose={closeModal}
+                style={customStyles}
+                contentLabel="Confirm with Password"
               >
+                <h2>Confirm Profile Edit</h2>
+                <form className="modalForm">
+                  <input
+                    type="text"
+                    name="password"
+                    value={password}
+                    onChange={changePass}
+                    placeholder="Account Password..."
+                    required
+                  />
+                </form>
+                <div className="buttonContainer">
+                  <button
+                    onClick={onSubmit}
+                    className="btn btn-primary modalButtons"
+                  >
+                    Confirm
+                  </button>
+                  <button
+                    onClick={closeModal}
+                    className="btn btn-danger modalButtons"
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </Modal>
+              <button className="btn btn-danger" onClick={onEdit}>
                 Cancel
               </button>
-            </div>
-          </Modal>
-          <button className="btn btn-danger" onClick={onEdit}>
-            Cancel
-          </button>
-        </Fragment>
-      ) : (
-        <button className="btn btn-secondary" onClick={onEdit}>
-          Edit
-        </button>
-      )}
+            </Fragment>
+          </Fragment>
+        ) : (
+          <Fragment>
+            <p className="solid">
+              <span className="lab">Username</span>
+              <span>{user && user.username}</span>
+            </p>
+            <p className="solid">
+              <span className="lab">First Name</span>
+              <span>{user && user.firstname}</span>
+            </p>
+            <p className="solid">
+              <span className="lab">Last Name</span>
+              <span>{user && user.lastname}</span>
+            </p>
+            <p className="solid">
+              <span className="lab">Email</span>
+              <span>{user && user.email}</span>
+            </p>
+            {showButton && (
+              <button className="btn btn-secondary" onClick={onEdit}>
+                Edit
+              </button>
+            )}
+          </Fragment>
+        )}
+      </div>
     </div>
   ) : (
     <Spinner />
   );
+};
+Profile.propTypes = {
+  user: PropTypes.object.isRequired,
+  showButton: PropTypes.bool.isRequired,
 };
 
 export default Profile;

@@ -13,7 +13,7 @@ const PlaceBid = ({ match }) => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      loadUser(user.user_id);
+      loadUser(localStorage.getItem("idUser"));
     } else {
       loadUser(0);
     }

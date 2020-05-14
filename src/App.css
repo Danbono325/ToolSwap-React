@@ -119,3 +119,8 @@ p {
   cursor: pointer;
   /* width: 2%; */
 }
+.username {
+  margin: 16px 0px 0px 8px;
+  font-size: xx-large;
+  font-weight: lighter;
+}

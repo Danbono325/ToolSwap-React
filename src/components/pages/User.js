@@ -25,9 +25,9 @@ const User = ({ match }) => {
 
   return (
     <div>
-      <p>{user_.username}'s Profile</p>
+      <h2 className="username">{user_.username}'s Profile</h2>
+      <SkillList skillState={skills} showButton={false} />
       <Profile user={user_} showButton={false} />
-      <SkillList skillState={skills} showButton={true} />
     </div>
   );
 };

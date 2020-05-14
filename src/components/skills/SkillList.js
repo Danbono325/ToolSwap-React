@@ -15,7 +15,7 @@ const SkillList = ({ showButton, skillState }) => {
 
   return skills !== null && !loading ? (
     skillState.map((skill) => (
-      <SkillItem key={skill.skillID} skill={skill} showButton={showButton} />
+      <SkillItem key={skill.skillID} showButton={showButton} skill={skill} />
     ))
   ) : (
     <Spinner />

@@ -70,6 +70,7 @@ const MyListingItem = ({ listing, showButtons }) => {
 
 MyListingItem.propTypes = {
   listing: PropTypes.object.isRequired,
+  showButtons: PropTypes.bool.isRequired,
 };
 
 export default MyListingItem;

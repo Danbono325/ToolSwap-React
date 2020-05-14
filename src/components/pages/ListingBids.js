@@ -10,7 +10,7 @@ const ListingBids = ({ match }) => {
   const bidContext = useContext(BidContext);
   const listingContext = useContext(ListingContext);
 
-  const { user, loadUser, isAuthenticated } = authContext;
+  const { loadUser, isAuthenticated } = authContext;
   const { getListing, listing } = listingContext;
   const { getListingsBids, bids } = bidContext;
 

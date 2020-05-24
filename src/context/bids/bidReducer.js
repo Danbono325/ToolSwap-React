@@ -50,7 +50,7 @@ export default (state, action) => {
     case CLEAR_BIDS:
       return {
         ...state,
-        bids: null,
+        bids: [],
         bid: {},
       };
     case RESET_LOADING:

@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
+import PropTypes from "prop-types";
 import AuthContext from "../../context/auth/authContext";
 import BidContext from "../../context/bids/bidContext";
 
@@ -141,6 +142,9 @@ const BidForm = ({ listing, edit }) => {
       </form>
     </div>
   );
+};
+BidForm.propTypes = {
+  edit: PropTypes.bool.isRequired,
 };
 
 export default BidForm;

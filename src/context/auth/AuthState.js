@@ -14,6 +14,7 @@ import {
   LOGIN_FAIL,
   LOGOUT,
   CLEAR_ERRORS,
+  CLEAR_USER,
   UPDATE_SUCCESS,
   UPDATE_FAILED,
   RESET_LOADING,
@@ -64,7 +65,6 @@ const AuthState = (props) => {
     if (res.data.user) {
       dispatch({ type: LOGIN_SUCCESS, payload: res.data });
 
-      console.log("user_id", res.data.user["user_id"]);
       loadUser(res.data.user["user_id"]);
     } else {
       dispatch({ type: LOGIN_FAIL, payload: res.data.Message });
@@ -83,11 +83,9 @@ const AuthState = (props) => {
     }
 
     try {
-      console.log("id for param", id);
       const res = await axios.get(`/user/getLoggedIn.php?user_id=${id}`);
 
       dispatch({ type: USER_LOADED, payload: res.data });
-      console.log("load user res ", res.data);
     } catch (err) {
       dispatch({ type: AUTH_ERROR });
     }
@@ -130,6 +128,8 @@ const AuthState = (props) => {
 
   const resetLoading = () => dispatch({ type: RESET_LOADING });
 
+  const clearUser = () => dispatch({ type: CLEAR_USER });
+
   return (
     <AuthContext.Provider
       value={{
@@ -145,6 +145,7 @@ const AuthState = (props) => {
         login,
         logout,
         clearErrors,
+        clearUser,
         getUser,
       }}
     >

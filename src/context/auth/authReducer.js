@@ -8,6 +8,7 @@ import {
   LOGIN_FAIL,
   LOGOUT,
   CLEAR_ERRORS,
+  CLEAR_USER,
   UPDATE_SUCCESS,
   UPDATE_FAILED,
   RESET_LOADING,
@@ -74,6 +75,11 @@ export default (state, action) => {
       return {
         ...state,
         loading: true,
+      };
+    case CLEAR_USER:
+      return {
+        ...state,
+        user_: {},
       };
     default:
       return state;

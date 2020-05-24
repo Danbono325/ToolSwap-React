@@ -8,7 +8,7 @@ const PlaceBid = ({ match }) => {
   const authContext = useContext(AuthContext);
   const listingContext = useContext(ListingContext);
 
-  const { isAuthenticated, user, loadUser } = authContext;
+  const { isAuthenticated, loadUser } = authContext;
   const { getListing, listing } = listingContext;
 
   useEffect(() => {

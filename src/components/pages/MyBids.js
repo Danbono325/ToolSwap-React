@@ -1,15 +1,19 @@
-import React, { useEffect, useContext } from "react";
-import BidForm from "../../components/bids/BidForm";
-import BidList from "../../components/bids/BidList";
+import React, { useEffect, useState, useContext } from "react";
+import MyBidList from "../bids/MyBidList";
 import AuthContext from "../../context/auth/authContext";
+import ListingContext from "../../context/listings/listingContext";
 import BidContext from "../../context/bids/bidContext";
 
 const MyBids = () => {
   const authContext = useContext(AuthContext);
   const bidContext = useContext(BidContext);
+  const listingContext = useContext(ListingContext);
 
   const { isAuthenticated, loadUser } = authContext;
   const { getUsersBids, bids } = bidContext;
+  const { getListing } = listingContext;
+
+  const [listings, setListings] = useState(null);
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -21,16 +25,22 @@ const MyBids = () => {
     // eslint-disable-next-line
   }, []);
 
-  return (
-    <div>
-      <div className="column left">
-        <BidForm edit={true} />
-      </div>
-      <div className="column right">
-        <BidList bidState={bids} showButtons={true} />
-      </div>
-    </div>
-  );
+  useEffect(() => {
+    makeListings();
+    // eslint-disable-next-line
+  }, [bids]);
+
+  const makeListings = () => {
+    setListings([]);
+    bids.forEach((bid, index) => {
+      let promise = getListing(bid.listingID);
+      promise.then((val) => {
+        setListings((listings) => [...listings, val]);
+      });
+    });
+  };
+
+  return <MyBidList listings={listings} bids={bids} />;
 };
 
 export default MyBids;

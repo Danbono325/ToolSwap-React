@@ -37,8 +37,9 @@ const ListingState = (props) => {
       const res = await axios.get(`/listing/readListing.php?listing_id=${id}`);
 
       dispatch({ type: GET_LISTING, payload: res.data["data"][0] });
+      return res.data["data"][0];
     } catch (err) {
-      dispatch({ type: LISTING_ERROR, payload: err.response.Message });
+      dispatch({ type: LISTING_ERROR, payload: err.response });
     }
   };
 

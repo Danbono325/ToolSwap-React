@@ -75,11 +75,7 @@ const Login = (props) => {
       <div className="buttons">
         <input type="submit" name="login" value="Login" />
         <Link to="/register">
-          <input
-            name="signup"
-            className="registerButton"
-            defaultValue="Register"
-          />
+          <button className="registerButton">Register</button>
         </Link>
       </div>
     </form>

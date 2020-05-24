@@ -16,7 +16,7 @@ const Header = ({ name }) => {
   const bidContext = useContext(BidContext);
   const skillContext = useContext(SkillContext);
 
-  const { isAuthenticated, logout, user } = authContext;
+  const { isAuthenticated, logout, user, clearUser } = authContext;
   const { clearListings } = listingContext;
   const { clearBids } = bidContext;
   const { clearSkills } = skillContext;
@@ -24,10 +24,7 @@ const Header = ({ name }) => {
   const onLogout = () => {
     logout();
     //Clear State
-    clearListings();
-    clearSkills();
-    clearBids();
-    clearSkills();
+    clearState();
   };
 
   const clearState = () => {
@@ -35,6 +32,7 @@ const Header = ({ name }) => {
     clearSkills();
     clearBids();
     clearSkills();
+    clearUser();
   };
 
   const authLinks = (

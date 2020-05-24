@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import AuthContext from "../../context/auth/authContext";
 import BidContext from "../../context/bids/bidContext";
@@ -18,6 +19,7 @@ const BidItem = ({ bid, showButtons }) => {
     estimatedTimeMonths,
     estimatedTimeYears,
     message,
+    userID,
   } = bid;
 
   const onDelete = (e) => {
@@ -28,14 +30,14 @@ const BidItem = ({ bid, showButtons }) => {
 
   return (
     <div className="card card-edit">
-      <p>${amount}</p>
-      <span className="spanContainer">Expected Time for Completion: </span>
+      <p className="title">${amount}</p>
+      <span className="spanContainer">Estimated Time for Completion: </span>
       {estimatedTimeYears > 0 && <span>{estimatedTimeYears} Years </span>}
       {estimatedTimeMonths > 0 && <span>{estimatedTimeMonths} Months </span>}
       {estimatedTimeWeeks > 0 && <span>{estimatedTimeWeeks} Weeks </span>}
       {estimatedTimeDays > 0 && <span>{estimatedTimeDays} Days </span>}
-      <p>Message: {message}</p>
-      {showButtons && (
+      <p className="description">Message: {message}</p>
+      {showButtons ? (
         <div className="buttonContainer">
           <button className="btn btn-secondary" onClick={() => setCurrent(bid)}>
             Edit
@@ -43,6 +45,12 @@ const BidItem = ({ bid, showButtons }) => {
           <button className="btn btn-danger" onClick={onDelete}>
             Delete
           </button>
+        </div>
+      ) : (
+        <div className="buttonContainer">
+          <Link to={`/user/${userID}`}>
+            <button className="btn btn-blue buttonLink">Contact</button>
+          </Link>
         </div>
       )}
     </div>

@@ -40,11 +40,8 @@ const MyListingItem = ({ listing, showButtons }) => {
       {expectedMonths > 0 && <span>{expectedMonths} Months </span>}
       {expectedWeeks > 0 && <span>{expectedWeeks} Weeks </span>}
       {expectedDays > 0 && <span>{expectedDays} Days </span>}
-      {showButtons && (
+      {showButtons ? (
         <div className="buttonContainer">
-          <button className="btn btn-primary" onClick={onCompleted}>
-            Completed
-          </button>
           <button
             className="btn btn-secondary"
             onClick={() => setCurrent(listing)}
@@ -61,6 +58,12 @@ const MyListingItem = ({ listing, showButtons }) => {
           </Link>
           <button className="btn btn-danger" onClick={onDelete}>
             Delete
+          </button>
+        </div>
+      ) : (
+        <div className="buttonContainer">
+          <button className="btn btn-primary" onClick={onCompleted}>
+            Completed
           </button>
         </div>
       )}

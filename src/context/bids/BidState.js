@@ -22,7 +22,7 @@ const BidState = (props) => {
     bids: [],
     bid: {},
     current: null,
-    returnedMessage: null,
+    returnMessage: null,
     loading: true,
     error: null,
   };
@@ -40,15 +40,16 @@ const BidState = (props) => {
       },
     };
 
-    try {
-      const res = await axios.post(
-        `/bid/create.php?user_id=${user_id}&listing_id=${listing_id}`,
-        bid,
-        config
-      );
-      dispatch({ type: CREATE_BID, payload: res.data["Message"] });
-    } catch (err) {
-      dispatch({ type: BID_ERROR, payload: err.Message });
+    // try {
+    const res = await axios.post(
+      `/bid/create.php?user_id=${user_id}&listing_id=${listing_id}`,
+      bid,
+      config
+    );
+    if (res.data.Message === "Bid Created") {
+      dispatch({ type: CREATE_BID, payload: res.data.Message });
+    } else {
+      dispatch({ type: BID_ERROR, payload: res.data.Message });
     }
   };
 
@@ -59,12 +60,15 @@ const BidState = (props) => {
       setAuthToken(localStorage.token);
     }
 
-    try {
-      const res = await axios.get(`/bid/readUsersBids.php?user_id=${user_id}`);
+    const res = await axios.get(`/bid/readUsersBids.php?user_id=${user_id}`);
 
-      dispatch({ type: GETUSERS_BIDS, payload: res.data["data"] });
-    } catch (err) {
-      dispatch({ type: BID_ERROR, payload: err.Message });
+    if (res.data.data) {
+      dispatch({ type: GETUSERS_BIDS, payload: res.data.data });
+    } else {
+      dispatch({
+        type: BID_ERROR,
+        payload: "Trouble loading bids, try again.",
+      });
     }
   };
 
@@ -75,13 +79,17 @@ const BidState = (props) => {
       setAuthToken(localStorage.token);
     }
 
-    try {
-      const res = await axios.get(
-        `/bid/readListingBids.php?user_id=${user_id}&listing_id=${listing_id}`
-      );
-      dispatch({ type: GETLISTING_BIDS, payload: res.data["data"] });
-    } catch (err) {
-      dispatch({ type: BID_ERROR });
+    const res = await axios.get(
+      `/bid/readListingBids.php?user_id=${user_id}&listing_id=${listing_id}`
+    );
+
+    if (res.data.data) {
+      dispatch({ type: GETLISTING_BIDS, payload: res.data.data });
+    } else {
+      dispatch({
+        type: BID_ERROR,
+        payload: "Trouble loading bids, try again.",
+      });
     }
   };
 
@@ -103,15 +111,19 @@ const BidState = (props) => {
     if (localStorage.token) {
       setAuthToken(localStorage.token);
     }
-    try {
-      await axios.put(
-        `/bid/update.php?user_id=${user_id}&bid_id=${bid.bidID}`,
-        bid,
-        config
-      );
-      dispatch({ type: UPDATE_BID, payload: bid });
-    } catch (err) {
-      dispatch({ type: BID_ERROR, payload: err.Message });
+
+    const res = await axios.put(
+      `/bid/update.php?user_id=${user_id}&bid_id=${bid.bidID}`,
+      bid,
+      config
+    );
+    if (res.data.Message === "Bid Updated") {
+      dispatch({
+        type: UPDATE_BID,
+        payload: { bid: bid, Message: res.data.Message },
+      });
+    } else {
+      dispatch({ type: BID_ERROR, payload: res.data.Message });
     }
   };
 
@@ -120,11 +132,17 @@ const BidState = (props) => {
       setAuthToken(localStorage.token);
     }
 
-    try {
-      await axios.delete(`/bid/delete.php?user_id=${user_id}&bid_id=${bid_id}`);
-      dispatch({ type: DELETE_BID, payload: bid_id });
-    } catch (err) {
-      dispatch({ type: BID_ERROR, payload: err.Message });
+    const res = await axios.delete(
+      `/bid/delete.php?user_id=${user_id}&bid_id=${bid_id}`
+    );
+
+    if (res.data.Message === "Bid Deleted") {
+      dispatch({
+        type: DELETE_BID,
+        payload: { id: bid_id, Message: res.data.Message },
+      });
+    } else {
+      dispatch({ type: BID_ERROR, payload: res.data.Message });
     }
   };
 

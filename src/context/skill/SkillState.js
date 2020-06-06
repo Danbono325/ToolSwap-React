@@ -10,12 +10,14 @@ import {
   GET_SKILLS,
   RESET_LOADING,
   CLEAR_SKILLS,
+  SKILL_ERROR,
 } from "../types";
 
 const SkillState = (props) => {
   const initialState = {
     skills: null,
     loading: false,
+    returnMessage: null,
     error: null,
   };
 
@@ -32,9 +34,17 @@ const SkillState = (props) => {
       setAuthToken(localStorage.token);
     }
 
-    await axios.post(`/skill/create.php?user_id=${user_id}`, skill, config);
+    const res = await axios.post(
+      `/skill/create.php?user_id=${user_id}`,
+      skill,
+      config
+    );
 
-    dispatch({ type: ADD_SKILL });
+    if ((res.data.Message = "Skill Added")) {
+      dispatch({ type: ADD_SKILL, payload: res.data.Message });
+    } else {
+      dispatch({ type: SKILL_ERROR, payload: res.data.Message });
+    }
     getUsersSkills(user_id);
   };
 
@@ -49,8 +59,20 @@ const SkillState = (props) => {
       setAuthToken(localStorage.token);
     }
 
-    await axios.post(`/skill/delete.php?user_id=${user_id}`, skill, config);
-    dispatch({ type: REMOVE_SKILL, payload: skill.skillID });
+    const res = await axios.post(
+      `/skill/delete.php?user_id=${user_id}`,
+      skill,
+      config
+    );
+
+    if (res.data.Message === "Skill Removed") {
+      dispatch({
+        type: REMOVE_SKILL,
+        payload: { id: skill.skillID, message: res.data.Message },
+      });
+    } else {
+      dispatch({ type: SKILL_ERROR, payload: res.data.Message });
+    }
     getUsersSkills(user_id);
   };
 
@@ -59,7 +81,14 @@ const SkillState = (props) => {
 
     const res = await axios.get(`/skill/readUserSkills.php?user_id=${user_id}`);
 
-    dispatch({ type: GET_SKILLS, payload: res.data["data"] });
+    if (res.data.data) {
+      dispatch({ type: GET_SKILLS, payload: res.data.data });
+    } else {
+      dispatch({
+        type: SKILL_ERROR,
+        payload: "Trouble loading skills, try again.",
+      });
+    }
   };
 
   const resetLoading = () => dispatch({ type: RESET_LOADING });
@@ -71,6 +100,7 @@ const SkillState = (props) => {
       value={{
         skills: state.skills,
         loading: state.loading,
+        returnMessage: state.returnMessage,
         error: state.error,
         addSkill,
         removeSkill,

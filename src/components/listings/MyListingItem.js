@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, Fragment } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import AuthContext from "../../context/auth/authContext";
@@ -11,7 +11,12 @@ const MyListingItem = ({ listing, showButtons }) => {
   const bidContext = useContext(BidContext);
 
   const { user } = authContext;
-  const { setCurrent, deleteListing, clearCurrent } = listingContext;
+  const {
+    setCurrent,
+    deleteListing,
+    clearCurrent,
+    updateCompleted,
+  } = listingContext;
   const { clearBids } = bidContext;
 
   const {
@@ -22,9 +27,12 @@ const MyListingItem = ({ listing, showButtons }) => {
     expectedWeeks,
     expectedMonths,
     expectedYears,
+    completed,
   } = listing;
 
-  const onCompleted = () => {};
+  const onCompleted = () => {
+    updateCompleted(localStorage.getItem("idUser"), listingID);
+  };
 
   const onDelete = () => {
     deleteListing(user.user_id, listingID);
@@ -40,31 +48,38 @@ const MyListingItem = ({ listing, showButtons }) => {
       {expectedMonths > 0 && <span>{expectedMonths} Months </span>}
       {expectedWeeks > 0 && <span>{expectedWeeks} Weeks </span>}
       {expectedDays > 0 && <span>{expectedDays} Days </span>}
-      {showButtons ? (
+      {completed === "0" ? (
         <div className="buttonContainer">
-          <button
-            className="btn btn-secondary"
-            onClick={() => setCurrent(listing)}
-          >
-            Edit
-          </button>
-          <Link to={`/listingbids/${listingID}`}>
-            <button
-              className="buttonLink btn btn-blue"
-              onClick={() => clearBids()}
-            >
-              Bids
-            </button>
-          </Link>
-          <button className="btn btn-danger" onClick={onDelete}>
-            Delete
-          </button>
-        </div>
-      ) : (
-        <div className="buttonContainer">
+          {showButtons && (
+            <Fragment>
+              <button
+                className="btn btn-secondary"
+                onClick={() => setCurrent(listing)}
+              >
+                Edit
+              </button>
+              <Link to={`/listingbids/${listingID}`}>
+                <button
+                  className="buttonLink btn btn-blue"
+                  onClick={() => clearBids()}
+                >
+                  Bids
+                </button>
+              </Link>
+            </Fragment>
+          )}
           <button className="btn btn-primary" onClick={onCompleted}>
             Completed
           </button>
+          {showButtons && (
+            <button className="btn btn-danger" onClick={onDelete}>
+              Delete
+            </button>
+          )}
+        </div>
+      ) : (
+        <div className="buttonContainer">
+          <button className="btn btn-primary">Review</button>
         </div>
       )}
     </div>

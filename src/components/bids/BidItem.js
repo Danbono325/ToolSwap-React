@@ -31,12 +31,12 @@ const BidItem = ({ bid, showButtons }) => {
   return (
     <div className="card card-edit">
       <p className="title">${amount}</p>
+      <p className="description">Message: {message}</p>
       <span className="spanContainer">Estimated Time for Completion: </span>
       {estimatedTimeYears > 0 && <span>{estimatedTimeYears} Years </span>}
       {estimatedTimeMonths > 0 && <span>{estimatedTimeMonths} Months </span>}
       {estimatedTimeWeeks > 0 && <span>{estimatedTimeWeeks} Weeks </span>}
       {estimatedTimeDays > 0 && <span>{estimatedTimeDays} Days </span>}
-      <p className="description">Message: {message}</p>
       {showButtons ? (
         <div className="buttonContainer">
           <button className="btn btn-secondary" onClick={() => setCurrent(bid)}>

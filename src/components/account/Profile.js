@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState, Fragment } from "react";
+import React, { useContext, useState, Fragment } from "react";
 import Spinner from "../layout/Spinner";
 import AuthContext from "../../context/auth/authContext";
 import AlertContext from "../../context/alert/alertContext";
@@ -27,23 +27,8 @@ const Profile = ({ user, showButton }) => {
   const authContext = useContext(AuthContext);
   const alertContext = useContext(AlertContext);
 
-  const {
-    isAuthenticated,
-    loading,
-    loadUser,
-    login,
-    error,
-    updateUser,
-  } = authContext;
+  const { isAuthenticated, loading, login, error, updateUser } = authContext;
   const { setAlert } = alertContext;
-
-  useEffect(() => {
-    if (isAuthenticated) {
-      loadUser(localStorage.getItem("idUser"));
-    }
-
-    // eslint-disable-next-line
-  }, []);
 
   const [edit, setEdit] = useState(false);
 
@@ -81,6 +66,7 @@ const Profile = ({ user, showButton }) => {
         setEdit(!edit);
       }
     }
+    closeModal();
   };
 
   const [modalIsOpen, setIsOpen] = React.useState(false);
@@ -208,7 +194,6 @@ const Profile = ({ user, showButton }) => {
   );
 };
 Profile.propTypes = {
-  user: PropTypes.object.isRequired,
   showButton: PropTypes.bool.isRequired,
 };
 

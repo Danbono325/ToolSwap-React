@@ -50,6 +50,15 @@ export default (state, action) => {
         ),
         loading: false,
       };
+    case UPDATE_ASCOMPLETED:
+      return {
+        ...state,
+        listings: state.listings.map((listing) =>
+          listing.listingID === action.payload
+            ? (listing = { ...listing, completed: "1" })
+            : listing
+        ),
+      };
     case SET_CURRENT:
       return {
         ...state,

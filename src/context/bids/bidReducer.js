@@ -39,19 +39,23 @@ export default (state, action) => {
       return {
         ...state,
         bids: state.bids.map((bid) =>
-          bid.bidID === action.payload.bidID ? action.payload : bid
+          bid.bidID === action.payload.bid.bidID ? action.payload.bid : bid
         ),
+        returnMessage: action.payload.Message,
       };
     case DELETE_BID:
       return {
         ...state,
-        bids: state.bids.filter((bid) => bid.bidID !== action.payload),
+        bids: state.bids.filter((bid) => bid.bidID !== action.payload.id),
+        returnMessage: action.payload.Message,
       };
     case CLEAR_BIDS:
       return {
         ...state,
         bids: [],
         bid: {},
+        returnMessage: null,
+        error: null,
       };
     case RESET_LOADING:
       return {

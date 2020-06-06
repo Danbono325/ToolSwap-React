@@ -6,7 +6,7 @@
   --light-color: #f4f4f4;
   --danger-color: #fe5e51;
   --warning-color: #fffb96;
-  --success-color: #28a745;
+  --success-color: #5cb85c;
 }
 body {
   font-family: "Roboto", sans-serif;
@@ -90,6 +90,7 @@ body {
   color: #fff;
 }
 
+.btn-success,
 .alert-success {
   background: var(--success-color);
   color: #fff;

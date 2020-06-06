@@ -4,15 +4,18 @@ import BidContext from "../../context/bids/bidContext";
 import ListingContext from "../../context/listings/listingContext";
 import MyListingsItem from "../listings/MyListingItem";
 import BidList from "../bids/BidList";
+import AlertContext from "../../context/alert/alertContext";
 
 const ListingBids = ({ match }) => {
   const authContext = useContext(AuthContext);
   const bidContext = useContext(BidContext);
   const listingContext = useContext(ListingContext);
+  const alertContext = useContext(AlertContext);
 
   const { loadUser, isAuthenticated } = authContext;
   const { getListing, listing } = listingContext;
-  const { getListingsBids, bids } = bidContext;
+  const { getListingsBids, bids, error } = bidContext;
+  const { setAlert } = alertContext;
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -22,6 +25,9 @@ const ListingBids = ({ match }) => {
     }
     getListing(match.params.listing);
     getListingsBids(localStorage.getItem("idUser"), match.params.listing);
+    if (error) {
+      setAlert(error, "danger");
+    }
     // eslint-disable-next-line
   }, []);
 

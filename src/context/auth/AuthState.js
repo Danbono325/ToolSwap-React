@@ -66,8 +66,10 @@ const AuthState = (props) => {
       dispatch({ type: LOGIN_SUCCESS, payload: res.data });
 
       loadUser(res.data.user["user_id"]);
+      return true;
     } else {
       dispatch({ type: LOGIN_FAIL, payload: res.data.Message });
+      return false;
     }
   };
 
@@ -93,7 +95,7 @@ const AuthState = (props) => {
 
   const getUser = async (user_id) => {
     const res = await axios.get(`/user/read.php?user_id=${user_id}`);
-    dispatch({ type: GET_USER, payload: res.data["data"][0] });
+    dispatch({ type: GET_USER, payload: res.data.data[0] });
   };
 
   // Clear Errors

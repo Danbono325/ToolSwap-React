@@ -48,3 +48,4 @@ export const ADD_SKILL = "ADD_SKILL";
 export const REMOVE_SKILL = "REMOVE_SKILL";
 export const GET_SKILLS = "GET_SKILLS";
 export const CLEAR_SKILLS = "CLEAR_SKILLS";
+export const SKILL_ERROR = "SKILL_ERROR";

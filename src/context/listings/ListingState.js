@@ -119,12 +119,29 @@ const ListingState = (props) => {
     dispatch({ type: GET_LISTINGS, payload: res.data["data"] });
   };
 
+  // UPDATE LISTING AS COMPLETED
+  const updateCompleted = async (iduser, id) => {
+    if (localStorage.token) {
+      setAuthToken(localStorage.token);
+    }
+
+    try {
+      // DELETE ON BACKEND
+      await axios.put(
+        `/listing/updateAsComplete.php?user_id=${iduser}&listing_id=${id}`
+      );
+
+      dispatch({ type: UPDATE_ASCOMPLETED, payload: id });
+    } catch (err) {
+      dispatch({ type: LISTING_ERROR, payload: err.response.Message });
+    }
+  };
+
   // DELETE LISTING
   const deleteListing = async (iduser, id) => {
     if (localStorage.token) {
       setAuthToken(localStorage.token);
     }
-
     try {
       // DELETE ON BACKEND
       await axios.delete(
@@ -143,7 +160,6 @@ const ListingState = (props) => {
 
   const resetLoading = () => dispatch({ type: RESET_LOADING });
 
-  // UPDATE LISTING AS COMPLETED
   // UPDATE LISTING AS SUBCONTRACTED
 
   return (
@@ -161,6 +177,7 @@ const ListingState = (props) => {
         getUsersListings,
         deleteListing,
         getUncompletedListings,
+        updateCompleted,
         getListing,
         clearListings,
       }}

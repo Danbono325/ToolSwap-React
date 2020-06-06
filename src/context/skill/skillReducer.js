@@ -4,6 +4,7 @@ import {
   GET_SKILLS,
   RESET_LOADING,
   CLEAR_SKILLS,
+  SKILL_ERROR,
 } from "../types";
 
 export default (state, action) => {
@@ -11,13 +12,15 @@ export default (state, action) => {
     case ADD_SKILL:
       return {
         ...state,
+        returnMessage: action.payload,
       };
     case REMOVE_SKILL:
       return {
         ...state,
         skills: state.skills.filter(
-          (skill) => skill.skillID !== action.payload
+          (skill) => skill.skillID !== action.payload.id
         ),
+        returnMessage: action.payload.message,
       };
     case GET_SKILLS:
       return {
@@ -34,6 +37,13 @@ export default (state, action) => {
       return {
         ...state,
         skills: null,
+        returnMessage: null,
+        error: null,
+      };
+    case SKILL_ERROR:
+      return {
+        ...state,
+        error: action.payload,
       };
     default:
       return {

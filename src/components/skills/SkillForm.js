@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import SkillContext from "../../context/skill/skillContext";
 import AlertContext from "../../context/alert/alertContext";
 
@@ -6,8 +6,21 @@ const SkillForm = () => {
   const skillContext = useContext(SkillContext);
   const alertContext = useContext(AlertContext);
 
-  const { addSkill } = skillContext;
+  const { addSkill, returnMessage, error } = skillContext;
   const { setAlert } = alertContext;
+
+  useEffect(() => {
+    console.log("ran");
+    console.log("returnMessage" + returnMessage);
+
+    if (returnMessage) {
+      setAlert(returnMessage, "success");
+    } else if (error) {
+      setAlert(error, "danger");
+    }
+
+    // eslint-disable-next-line
+  }, [returnMessage, error]);
 
   const [skill, setSkill] = useState({
     description: "",

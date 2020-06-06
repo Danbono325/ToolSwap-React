@@ -2,13 +2,23 @@ import React, { useEffect, useState, useContext } from "react";
 import PropTypes from "prop-types";
 import AuthContext from "../../context/auth/authContext";
 import BidContext from "../../context/bids/bidContext";
+import AlertContext from "../../context/alert/alertContext";
 
 const BidForm = ({ listing, edit }) => {
   const authContext = useContext(AuthContext);
   const bidContext = useContext(BidContext);
+  const alertContext = useContext(AlertContext);
 
   const { user } = authContext;
-  const { current, createBid, updateBid, clearCurrent } = bidContext;
+  const {
+    current,
+    createBid,
+    updateBid,
+    clearCurrent,
+    returnMessage,
+    error,
+  } = bidContext;
+  const { setAlert } = alertContext;
 
   useEffect(() => {
     if (current != null) {
@@ -23,6 +33,14 @@ const BidForm = ({ listing, edit }) => {
         estimatedTimeYears: 0,
       });
     }
+
+    if (returnMessage) {
+      setAlert(returnMessage, "success");
+    } else if (error) {
+      setAlert(error, "danger");
+    }
+
+    // eslint-disable-next-line
   }, [bidContext, current]);
 
   const [bid, setBid] = useState({
@@ -47,7 +65,17 @@ const BidForm = ({ listing, edit }) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    if (!edit) {
+    if (
+      estimatedTimeDays === 0 &&
+      estimatedTimeWeeks === 0 &&
+      estimatedTimeMonths === 0 &&
+      estimatedTimeYears === 0
+    ) {
+      setAlert(
+        "You must have a minimum of one day for estimated time.",
+        "warning"
+      );
+    } else if (!edit) {
       createBid(bid, user.user_id, listing.listingID);
     } else {
       updateBid(bid, user.user_id);

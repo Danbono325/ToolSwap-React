@@ -2,13 +2,23 @@ import React, { useState, useEffect, useContext } from "react";
 import "./listings.css";
 import AuthContext from "../../context/auth/authContext";
 import ListingContext from "../../context/listings/listingContext";
+import AlertContext from "../../context/alert/alertContext";
 
 const ListingForm = () => {
   const authContext = useContext(AuthContext);
   const listingContext = useContext(ListingContext);
+  const alertContext = useContext(AlertContext);
 
   const { user } = authContext;
-  const { current, clearCurrent, updateListing, addListing } = listingContext;
+  const {
+    current,
+    clearCurrent,
+    updateListing,
+    addListing,
+    returnMessage,
+    error,
+  } = listingContext;
+  const { setAlert } = alertContext;
 
   useEffect(() => {
     if (current != null) {
@@ -23,7 +33,17 @@ const ListingForm = () => {
         expectedYears: 0,
       });
     }
+    // eslint-disable-next-line
   }, [listingContext, current]);
+
+  useEffect(() => {
+    if (returnMessage) {
+      setAlert(returnMessage, "success");
+    } else if (error) {
+      setAlert(error, "danger");
+    }
+    // eslint-disable-next-line
+  }, [returnMessage, error]);
 
   const [listing, setListing] = useState({
     title: "",
@@ -53,20 +73,38 @@ const ListingForm = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    if (current == null) {
+    if (
+      expectedDays === 0 &&
+      expectedWeeks === 0 &&
+      expectedMonths === 0 &&
+      expectedYears === 0
+    ) {
+      setAlert(
+        "You must have a minimum of one day for expected time.",
+        "warning"
+      );
+    } else if (current == null) {
       addListing(listing, user.user_id);
+      setListing({
+        title: "",
+        description: "",
+        expectedDays: 0,
+        expectedWeeks: 0,
+        expectedMonths: 0,
+        expectedYears: 0,
+      });
     } else {
       updateListing(listing, user.user_id);
       clearCurrent();
+      setListing({
+        title: "",
+        description: "",
+        expectedDays: 0,
+        expectedWeeks: 0,
+        expectedMonths: 0,
+        expectedYears: 0,
+      });
     }
-    setListing({
-      title: "",
-      description: "",
-      expectedDays: 0,
-      expectedWeeks: 0,
-      expectedMonths: 0,
-      expectedYears: 0,
-    });
   };
 
   return (

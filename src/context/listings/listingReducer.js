@@ -29,16 +29,17 @@ export default (state, action) => {
     case ADD_LISTING:
       return {
         ...state,
-        ...action.payload,
         loading: false,
+        returnMessage: action.payload.Message,
       };
     case DELETE_LISTING:
       return {
         ...state,
         listings: state.listings.filter(
-          (listing) => listing.listingID !== action.payload
+          (listing) => listing.listingID !== action.payload.id
         ),
         loading: false,
+        returnMessage: action.payload.Message,
       };
     case UPDATE_LISTING:
       return {
@@ -49,15 +50,17 @@ export default (state, action) => {
             : listing
         ),
         loading: false,
+        returnMessage: action.payload.Message,
       };
     case UPDATE_ASCOMPLETED:
       return {
         ...state,
         listings: state.listings.map((listing) =>
-          listing.listingID === action.payload
+          listing.listingID === action.payload.id
             ? (listing = { ...listing, completed: "1" })
             : listing
         ),
+        returnMessage: action.payload.Message,
       };
     case SET_CURRENT:
       return {
@@ -79,6 +82,8 @@ export default (state, action) => {
         ...state,
         listings: null,
         listing: {},
+        returnMessage: null,
+        error: null,
       };
     case RESET_LOADING:
       return {

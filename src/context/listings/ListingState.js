@@ -24,6 +24,7 @@ const ListingState = (props) => {
     listing: {},
     current: null,
     loading: true,
+    returnMessage: null,
     error: null,
   };
 
@@ -37,7 +38,7 @@ const ListingState = (props) => {
       const res = await axios.get(`/listing/readListing.php?listing_id=${id}`);
 
       dispatch({ type: GET_LISTING, payload: res.data["data"][0] });
-      return res.data["data"][0];
+      return res.data.data[0];
     } catch (err) {
       dispatch({ type: LISTING_ERROR, payload: err.response });
     }
@@ -51,17 +52,18 @@ const ListingState = (props) => {
       },
     };
 
-    try {
-      const res = await axios.post(
-        `/listing/create.php?user_id=${id}`,
-        listing,
-        config
-      );
+    const res = await axios.post(
+      `/listing/create.php?user_id=${id}`,
+      listing,
+      config
+    );
 
+    if (res.data.Message === "Listing Created") {
       dispatch({ type: ADD_LISTING, payload: res.data });
-    } catch (err) {
-      dispatch({ type: LISTING_ERROR, payload: err.Message });
+    } else {
+      dispatch({ type: LISTING_ERROR, payload: res.data.Message });
     }
+
     getUsersListings(id);
   };
 
@@ -78,19 +80,20 @@ const ListingState = (props) => {
       },
     };
 
-    try {
-      // UPDATE ON BACKEND
-      await axios.put(
-        `/listing/update.php?user_id=
-            ${user_id}
-            &listing_id=
-            ${listing.listingID}`,
-        listing,
-        config
-      );
-      dispatch({ type: UPDATE_LISTING, payload: listing });
-    } catch (err) {
-      dispatch({ type: LISTING_ERROR, payload: err.Message });
+    // UPDATE ON BACKEND
+    const res = await axios.put(
+      `/listing/update.php?user_id=
+          ${user_id}
+          &listing_id=
+          ${listing.listingID}`,
+      listing,
+      config
+    );
+
+    if (res.data.Message === "Listing Updated") {
+      dispatch({ type: UPDATE_LISTING, payload: res.data });
+    } else {
+      dispatch({ type: LISTING_ERROR, payload: res.data.Message });
     }
   };
 
@@ -105,7 +108,7 @@ const ListingState = (props) => {
     // Get all Uncompleted Listings for Home page
     const res = await axios.get(`/listing/readUncompleted.php`);
 
-    dispatch({ type: GET_LISTINGS, payload: res.data["data"] });
+    dispatch({ type: GET_LISTINGS, payload: res.data.data });
   };
 
   // GET USER'S LISTINGS
@@ -116,7 +119,7 @@ const ListingState = (props) => {
     const res = await axios.get(`/listing/readUsersListings.php?user_id=${id}`);
 
     //Alter Dispatch
-    dispatch({ type: GET_LISTINGS, payload: res.data["data"] });
+    dispatch({ type: GET_LISTINGS, payload: res.data.data });
   };
 
   // UPDATE LISTING AS COMPLETED
@@ -125,32 +128,39 @@ const ListingState = (props) => {
       setAuthToken(localStorage.token);
     }
 
-    try {
-      // DELETE ON BACKEND
-      await axios.put(
-        `/listing/updateAsComplete.php?user_id=${iduser}&listing_id=${id}`
-      );
+    // Update as Complete ON BACKEND
+    const res = await axios.put(
+      `/listing/updateAsComplete.php?user_id=${iduser}&listing_id=${id}`
+    );
 
-      dispatch({ type: UPDATE_ASCOMPLETED, payload: id });
-    } catch (err) {
-      dispatch({ type: LISTING_ERROR, payload: err.response.Message });
+    if (res.data.Message === "Listing Updated as Complete") {
+      dispatch({
+        type: UPDATE_ASCOMPLETED,
+        payload: { id: id, Message: res.data.Message },
+      });
+    } else {
+      dispatch({ type: LISTING_ERROR, payload: res.data.Message });
     }
   };
 
   // DELETE LISTING
-  const deleteListing = async (iduser, id) => {
+  const deleteListing = async (iduser, idlisting) => {
     if (localStorage.token) {
       setAuthToken(localStorage.token);
     }
-    try {
-      // DELETE ON BACKEND
-      await axios.delete(
-        `/listing/delete.php?user_id=${iduser}&listing_id=${id}`
-      );
 
-      dispatch({ type: DELETE_LISTING, payload: id });
-    } catch (err) {
-      dispatch({ type: LISTING_ERROR, payload: err.response.Message });
+    // DELETE ON BACKEND
+    const res = await axios.delete(
+      `/listing/delete.php?user_id=${iduser}&listing_id=${idlisting}`
+    );
+
+    if (res.data.Message === "Listing Deleted") {
+      dispatch({
+        type: DELETE_LISTING,
+        payload: { id: idlisting, Message: res.data.Message },
+      });
+    } else {
+      dispatch({ type: LISTING_ERROR, payload: res.data.Message });
     }
   };
 
@@ -169,6 +179,7 @@ const ListingState = (props) => {
         listing: state.listing,
         current: state.current,
         loading: state.loading,
+        returnMessage: state.returnMessage,
         error: state.error,
         setCurrent,
         clearCurrent,

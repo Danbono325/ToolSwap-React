@@ -9,8 +9,8 @@ import {
   LOGOUT,
   CLEAR_ERRORS,
   CLEAR_USER,
-  UPDATE_SUCCESS,
-  UPDATE_FAILED,
+  USER_UPDATE,
+  USER_ERROR,
   RESET_LOADING,
 } from "../types";
 
@@ -30,10 +30,10 @@ export default (state, action) => {
       localStorage.setItem("isAuthenticated", "true");
       return {
         ...state,
-        ...action.payload,
         isAuthenticated: true,
         loading: false,
         user: action.payload.user,
+        returnMessage: action.payload.Message,
       };
     case REGISTER_FAIL:
     case AUTH_ERROR:
@@ -56,15 +56,17 @@ export default (state, action) => {
         ...state,
         user_: action.payload,
       };
-    case UPDATE_SUCCESS:
+    case USER_UPDATE:
       return {
         ...state,
-        ...action.payload,
+        user: action.payload.data,
+        token: action.payload.jwt,
+        returnMessage: action.payload.Message,
       };
-    case UPDATE_FAILED:
+    case USER_ERROR:
       return {
         ...state,
-        error: "Failed to update profile.",
+        error: action.payload,
       };
     case CLEAR_ERRORS:
       return {
@@ -80,6 +82,8 @@ export default (state, action) => {
       return {
         ...state,
         user_: {},
+        returnMessage: null,
+        error: null,
       };
     default:
       return state;

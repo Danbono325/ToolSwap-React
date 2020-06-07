@@ -9,8 +9,8 @@ export const LOGIN_FAIL = "LOGIN_FAIL";
 export const LOGOUT = "LOGOUT";
 export const CLEAR_ERRORS = "CLEAR_ERRORS";
 export const CLEAR_USER = "CLEAR_USER";
-export const UPDATE_SUCCESS = "UPDATE_SUCCESS";
-export const UPDATE_FAILED = "UPDATE_FAILED";
+export const USER_UPDATE = "USER_UPDATE";
+export const USER_ERROR = "USER_ERROR";
 
 // ALERTS
 export const SET_ALERT = "SET_ALERT";

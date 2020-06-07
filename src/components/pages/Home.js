@@ -1,11 +1,14 @@
 import React, { useEffect, useContext } from "react";
 import UncompletedListingsList from "../listings/UncompletedListingsList";
 import AuthContext from "../../context/auth/authContext";
+import AlertContext from "../../context/alert/alertContext";
 
 const Home = () => {
   const authContext = useContext(AuthContext);
+  const alertContext = useContext(AlertContext);
 
-  const { loadUser, isAuthenticated } = authContext;
+  const { loadUser, isAuthenticated, returnMessage, error } = authContext;
+  const { setAlert } = alertContext;
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -15,6 +18,15 @@ const Home = () => {
     }
     // eslint-disable-next-line
   }, []);
+
+  useEffect(() => {
+    if (returnMessage) {
+      setAlert(returnMessage, "success");
+    } else if (error) {
+      setAlert(error, "danger");
+    }
+    // eslint-disable-next-line
+  }, [returnMessage, error]);
 
   return (
     <div>

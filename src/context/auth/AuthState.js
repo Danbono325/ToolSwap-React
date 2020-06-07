@@ -15,8 +15,8 @@ import {
   LOGOUT,
   CLEAR_ERRORS,
   CLEAR_USER,
-  UPDATE_SUCCESS,
-  UPDATE_FAILED,
+  USER_UPDATE,
+  USER_ERROR,
   RESET_LOADING,
 } from "../types";
 
@@ -27,6 +27,7 @@ const AuthState = (props) => {
     loading: true,
     user: null,
     user_: {},
+    returnMessage: null,
     error: null,
   };
 
@@ -113,16 +114,15 @@ const AuthState = (props) => {
       },
     };
 
-    try {
-      const res = await axios.put(
-        `/user/update.php?user_id=${id}`,
-        formData,
-        config
-      );
-
-      dispatch({ type: UPDATE_SUCCESS, payload: res.data });
-    } catch (err) {
-      dispatch({ type: UPDATE_FAILED });
+    const res = await axios.put(
+      `/user/update.php?user_id=${id}`,
+      formData,
+      config
+    );
+    if (res.data.Message === "User Updated") {
+      dispatch({ type: USER_UPDATE, payload: res.data });
+    } else {
+      dispatch({ type: USER_ERROR, payload: res.data.Message });
     }
   };
 
@@ -140,6 +140,7 @@ const AuthState = (props) => {
         loading: state.loading,
         user: state.user,
         user_: state.user_,
+        returnMessage: state.returnMessage,
         error: state.error,
         register,
         loadUser,

@@ -10,9 +10,6 @@ const SkillForm = () => {
   const { setAlert } = alertContext;
 
   useEffect(() => {
-    console.log("ran");
-    console.log("returnMessage" + returnMessage);
-
     if (returnMessage) {
       setAlert(returnMessage, "success");
     } else if (error) {

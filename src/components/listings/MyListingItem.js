@@ -80,6 +80,9 @@ const MyListingItem = ({ listing, showButtons }) => {
       ) : (
         <div className="buttonContainer">
           <button className="btn btn-primary">Review</button>
+          <button className="btn btn-danger" onClick={onDelete}>
+            Delete
+          </button>
         </div>
       )}
     </div>

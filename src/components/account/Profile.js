@@ -1,4 +1,4 @@
-import React, { useContext, useState, Fragment } from "react";
+import React, { useContext, useState, useEffect, Fragment } from "react";
 import Spinner from "../layout/Spinner";
 import AuthContext from "../../context/auth/authContext";
 import AlertContext from "../../context/alert/alertContext";
@@ -27,8 +27,24 @@ const Profile = ({ user, showButton }) => {
   const authContext = useContext(AuthContext);
   const alertContext = useContext(AlertContext);
 
-  const { isAuthenticated, loading, login, error, updateUser } = authContext;
+  const {
+    isAuthenticated,
+    loading,
+    login,
+    returnMessage,
+    error,
+    updateUser,
+  } = authContext;
   const { setAlert } = alertContext;
+
+  useEffect(() => {
+    if (returnMessage) {
+      setAlert(returnMessage, "success");
+    } else if (error) {
+      setAlert(error, "danger");
+    }
+    // eslint-disable-next-line
+  }, [returnMessage, error]);
 
   const [edit, setEdit] = useState(false);
 

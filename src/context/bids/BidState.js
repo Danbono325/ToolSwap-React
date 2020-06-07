@@ -40,7 +40,6 @@ const BidState = (props) => {
       },
     };
 
-    // try {
     const res = await axios.post(
       `/bid/create.php?user_id=${user_id}&listing_id=${listing_id}`,
       bid,

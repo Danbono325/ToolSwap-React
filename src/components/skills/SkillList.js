@@ -10,7 +10,7 @@ const SkillList = ({ showButton, skillState }) => {
   const { loading, skills } = skillContext;
 
   if (skillState !== null && skillState.length === 0 && !loading) {
-    return <h4 style={{ textAlign: "center" }}>Add some skills.</h4>;
+    return <h4 style={{ textAlign: "center" }}>No skills yet.</h4>;
   }
 
   return skills !== null && !loading ? (

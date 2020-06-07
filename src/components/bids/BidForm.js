@@ -33,15 +33,17 @@ const BidForm = ({ listing, edit }) => {
         estimatedTimeYears: 0,
       });
     }
+    // eslint-disable-next-line
+  }, [bidContext, current]);
 
+  useEffect(() => {
     if (returnMessage) {
       setAlert(returnMessage, "success");
     } else if (error) {
       setAlert(error, "danger");
     }
-
     // eslint-disable-next-line
-  }, [bidContext, current]);
+  }, [returnMessage, error]);
 
   const [bid, setBid] = useState({
     amount: "",
@@ -77,18 +79,26 @@ const BidForm = ({ listing, edit }) => {
       );
     } else if (!edit) {
       createBid(bid, user.user_id, listing.listingID);
+      setBid({
+        amount: "",
+        message: "",
+        estimatedTimeDays: 0,
+        estimatedTimeWeeks: 0,
+        estimatedTimeMonths: 0,
+        estimatedTimeYears: 0,
+      });
     } else {
       updateBid(bid, user.user_id);
       clearCurrent();
+      setBid({
+        amount: "",
+        message: "",
+        estimatedTimeDays: 0,
+        estimatedTimeWeeks: 0,
+        estimatedTimeMonths: 0,
+        estimatedTimeYears: 0,
+      });
     }
-    setBid({
-      amount: "",
-      message: "",
-      estimatedTimeDays: 0,
-      estimatedTimeWeeks: 0,
-      estimatedTimeMonths: 0,
-      estimatedTimeYears: 0,
-    });
   };
 
   return (

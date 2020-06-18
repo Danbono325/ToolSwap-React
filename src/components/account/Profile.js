@@ -88,7 +88,16 @@ const Profile = ({ user, showButton }) => {
   const [modalIsOpen, setIsOpen] = React.useState(false);
 
   function openModal() {
-    setIsOpen(true);
+    if (
+      username === "" ||
+      firstname === "" ||
+      lastname === "" ||
+      email === ""
+    ) {
+      setAlert("All fields required", "warning");
+    } else {
+      setIsOpen(true);
+    }
   }
 
   function closeModal() {
@@ -152,6 +161,7 @@ const Profile = ({ user, showButton }) => {
                   <input
                     type="text"
                     name="password"
+                    type="password"
                     value={password}
                     onChange={changePass}
                     placeholder="Account Password..."

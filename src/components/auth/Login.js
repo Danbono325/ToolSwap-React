@@ -58,12 +58,13 @@ const Login = (props) => {
       <input
         type="text"
         name="password"
+        type="password"
         value={password}
         onChange={onChange}
         placeholder="Password..."
         required
       />
-      <div className="options">
+      {/* <div className="options">
         <div className="remember">
           <input type="checkbox" name="remember" id="remember-me" />
           <label htmlFor="remember-me">Remember Me</label>
@@ -71,7 +72,7 @@ const Login = (props) => {
         <a className="psw" href="#">
           Forgot password?
         </a>
-      </div>
+      </div> */}
       <div className="buttons">
         <input type="submit" name="login" value="Login" />
         <Link to="/register">

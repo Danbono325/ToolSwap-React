@@ -4,6 +4,7 @@ import AuthContext from "../../context/auth/authContext";
 import ListingContext from "../../context/listings/listingContext";
 import BidContext from "../../context/bids/bidContext";
 import AlertContext from "../../context/alert/alertContext";
+import Spinner from "../layout/Spinner";
 
 const MyBids = () => {
   const authContext = useContext(AuthContext);
@@ -11,7 +12,7 @@ const MyBids = () => {
   const listingContext = useContext(ListingContext);
   const alertContext = useContext(AlertContext);
 
-  const { isAuthenticated, loadUser } = authContext;
+  const { isAuthenticated, loadUser, loading } = authContext;
   const { getUsersBids, bids, returnMessage, error } = bidContext;
   const { getListing } = listingContext;
   const { setAlert } = alertContext;
@@ -25,6 +26,7 @@ const MyBids = () => {
       loadUser(0);
     }
     getUsersBids(localStorage.getItem("idUser"));
+
     if (returnMessage) {
       setAlert(returnMessage, "success");
     } else if (error) {
@@ -48,7 +50,11 @@ const MyBids = () => {
     });
   };
 
-  return <MyBidList listings={listings} bids={bids} />;
+  if (listings === null || loading) {
+    return <Spinner />;
+  } else {
+    return <MyBidList listings={listings} bids={bids} />;
+  }
 };
 
 export default MyBids;

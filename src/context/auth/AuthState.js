@@ -41,7 +41,7 @@ const AuthState = (props) => {
       },
     };
 
-    const res = await axios.post(`/user/create.php`, formData, config);
+    const res = await axios.post(`/api/user/create.php`, formData, config);
 
     if (res.data.user) {
       dispatch({ type: REGISTER_SUCCESS, payload: res.data });
@@ -61,7 +61,7 @@ const AuthState = (props) => {
       },
     };
 
-    const res = await axios.post(`/user/login.php`, formData, config);
+    const res = await axios.post(`/api/user/login.php`, formData, config);
 
     if (res.data.user) {
       dispatch({ type: LOGIN_SUCCESS, payload: res.data });
@@ -86,7 +86,7 @@ const AuthState = (props) => {
     }
 
     try {
-      const res = await axios.get(`/user/getLoggedIn.php?user_id=${id}`);
+      const res = await axios.get(`/api/user/getLoggedIn.php?user_id=${id}`);
 
       dispatch({ type: USER_LOADED, payload: res.data });
     } catch (err) {
@@ -95,7 +95,7 @@ const AuthState = (props) => {
   };
 
   const getUser = async (user_id) => {
-    const res = await axios.get(`/user/read.php?user_id=${user_id}`);
+    const res = await axios.get(`/api/user/read.php?user_id=${user_id}`);
     dispatch({ type: GET_USER, payload: res.data.data[0] });
   };
 
@@ -115,7 +115,7 @@ const AuthState = (props) => {
     };
 
     const res = await axios.put(
-      `/user/update.php?user_id=${id}`,
+      `/api/user/update.php?user_id=${id}`,
       formData,
       config
     );

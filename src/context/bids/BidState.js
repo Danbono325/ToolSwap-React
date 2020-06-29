@@ -41,7 +41,7 @@ const BidState = (props) => {
     };
 
     const res = await axios.post(
-      `/bid/create.php?user_id=${user_id}&listing_id=${listing_id}`,
+      `/api/bid/create.php?user_id=${user_id}&listing_id=${listing_id}`,
       bid,
       config
     );
@@ -59,7 +59,9 @@ const BidState = (props) => {
       setAuthToken(localStorage.token);
     }
 
-    const res = await axios.get(`/bid/readUsersBids.php?user_id=${user_id}`);
+    const res = await axios.get(
+      `/api/bid/readUsersBids.php?user_id=${user_id}`
+    );
 
     if (res.data.data) {
       dispatch({ type: GETUSERS_BIDS, payload: res.data.data });
@@ -79,7 +81,7 @@ const BidState = (props) => {
     }
 
     const res = await axios.get(
-      `/bid/readListingBids.php?user_id=${user_id}&listing_id=${listing_id}`
+      `/api/bid/readListingBids.php?user_id=${user_id}&listing_id=${listing_id}`
     );
 
     if (res.data.data) {
@@ -112,7 +114,7 @@ const BidState = (props) => {
     }
 
     const res = await axios.put(
-      `/bid/update.php?user_id=${user_id}&bid_id=${bid.bidID}`,
+      `/api/bid/update.php?user_id=${user_id}&bid_id=${bid.bidID}`,
       bid,
       config
     );
@@ -132,7 +134,7 @@ const BidState = (props) => {
     }
 
     const res = await axios.delete(
-      `/bid/delete.php?user_id=${user_id}&bid_id=${bid_id}`
+      `/api/bid/delete.php?user_id=${user_id}&bid_id=${bid_id}`
     );
 
     if (res.data.Message === "Bid Deleted") {

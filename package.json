@@ -35,5 +35,6 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://tool-swap.com:8000/api"
+  "proxy": "http://localhost:8080/api/",
+  "homepage": "http://tool-swap.com"
 }

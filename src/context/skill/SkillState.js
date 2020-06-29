@@ -35,7 +35,7 @@ const SkillState = (props) => {
     }
 
     const res = await axios.post(
-      `/skill/create.php?user_id=${user_id}`,
+      `/api/skill/create.php?user_id=${user_id}`,
       skill,
       config
     );
@@ -60,7 +60,7 @@ const SkillState = (props) => {
     }
 
     const res = await axios.post(
-      `/skill/delete.php?user_id=${user_id}`,
+      `/api/skill/delete.php?user_id=${user_id}`,
       skill,
       config
     );
@@ -79,7 +79,9 @@ const SkillState = (props) => {
   const getUsersSkills = async (user_id) => {
     resetLoading();
 
-    const res = await axios.get(`/skill/readUserSkills.php?user_id=${user_id}`);
+    const res = await axios.get(
+      `/api/skill/readUserSkills.php?user_id=${user_id}`
+    );
 
     if (res.data.data) {
       dispatch({ type: GET_SKILLS, payload: res.data.data });

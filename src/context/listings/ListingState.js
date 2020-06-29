@@ -35,7 +35,9 @@ const ListingState = (props) => {
     resetLoading();
 
     try {
-      const res = await axios.get(`/listing/readListing.php?listing_id=${id}`);
+      const res = await axios.get(
+        `/api/listing/readListing.php?listing_id=${id}`
+      );
 
       dispatch({ type: GET_LISTING, payload: res.data["data"][0] });
       return res.data.data[0];
@@ -53,7 +55,7 @@ const ListingState = (props) => {
     };
 
     const res = await axios.post(
-      `/listing/create.php?user_id=${id}`,
+      `/api/listing/create.php?user_id=${id}`,
       listing,
       config
     );
@@ -82,7 +84,7 @@ const ListingState = (props) => {
 
     // UPDATE ON BACKEND
     const res = await axios.put(
-      `/listing/update.php?user_id=
+      `/api/listing/update.php?user_id=
           ${user_id}
           &listing_id=
           ${listing.listingID}`,
@@ -106,7 +108,7 @@ const ListingState = (props) => {
   const getUncompletedListings = async () => {
     resetLoading();
     // Get all Uncompleted Listings for Home page
-    const res = await axios.get(`/listing/readUncompleted.php`);
+    const res = await axios.get(`/api/listing/readUncompleted.php`);
 
     dispatch({ type: GET_LISTINGS, payload: res.data.data });
   };
@@ -116,7 +118,9 @@ const ListingState = (props) => {
     resetLoading();
 
     // Get All Users Listings from backend (id)
-    const res = await axios.get(`/listing/readUsersListings.php?user_id=${id}`);
+    const res = await axios.get(
+      `/api/listing/readUsersListings.php?user_id=${id}`
+    );
 
     //Alter Dispatch
     dispatch({ type: GET_LISTINGS, payload: res.data.data });
@@ -130,7 +134,7 @@ const ListingState = (props) => {
 
     // Update as Complete ON BACKEND
     const res = await axios.put(
-      `/listing/updateAsComplete.php?user_id=${iduser}&listing_id=${id}`
+      `/api/listing/updateAsComplete.php?user_id=${iduser}&listing_id=${id}`
     );
 
     if (res.data.Message === "Listing Updated as Complete") {
@@ -151,7 +155,7 @@ const ListingState = (props) => {
 
     // DELETE ON BACKEND
     const res = await axios.delete(
-      `/listing/delete.php?user_id=${iduser}&listing_id=${idlisting}`
+      `/api/listing/delete.php?user_id=${iduser}&listing_id=${idlisting}`
     );
 
     if (res.data.Message === "Listing Deleted") {
